@@ -1,3 +1,114 @@
-body {margin: 0;
-padding: 0;}
+body {
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 70px calc(100vh - 70px);
+    height: 100vh;
+    background-image: url(img/bg-login.svg);
+    background-size: cover;;
+    overflow: hidden;
+    align-items: center;
+    justify-items: center;
+    background-position-x: -100%;
+}
 
+img {width: 50%;
+display: block;
+margin: 0 auto;
+max-width: 400px;}
+
+#login-signup {
+    width: 90%;
+    height: 400px;
+    background-color: white;
+    display: grid;
+    grid-template: "a b" 40px "c c" 2px "d d" auto;
+    align-items: center;
+    justify-items: center;
+    border-radius: 5%;
+    max-width: 300px;
+}
+
+.tab {
+    width: auto;
+}
+
+.tab-big {
+    width: auto;
+}
+
+#dividing-line {
+    height: 100%;
+    width: 100%;
+    grid-column: 1/3;
+    grid-row: 2/3;
+    background-color: yellow;
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.3em;
+    font-family: 'Fredericka the Great', cursive;
+    margin: 30px 20px;
+    line-height: 2em;
+    color: #DE7F5B;
+}
+
+a {
+    font-family: lato;
+}
+
+input[type="text"] {
+    margin: 30px auto;
+    width: 80%;
+    height: 15px;
+    padding: 10px;
+}
+
+.reveal {
+    display: block;
+    margin: 30px auto;
+}
+
+.no-display {
+    display: none;
+}
+
+#next-step, #login-btn {
+    display: block;
+    margin: 30px auto;
+    background-color: #74D8EB;
+    border: none;
+    border-radius: 5%;
+    padding: 13px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-family: lato, sans-serif;
+    transition: .3s;
+}
+
+#next-step:hover {
+    background-color: #BDB4F5;
+}
+
+.reveal-form {
+    z-index: 20;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    grid-column: 1/3;
+    grid-row: 3/4;
+    border-radius: 5%;
+}
+
+.no-reveal-form {
+    z-index: 10;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    grid-column: 1/3;
+    grid-row: 3/4;
+    border-radius: 5%;
+}
