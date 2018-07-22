@@ -1,0 +1,265 @@
+
+html {
+  font-family: sans-serif;
+  font-size: 100%;
+  background: #FFF;
+  overflow: hidden;
+}
+
+#title {
+  position: fixed;
+  top: 0;
+  left: 12rem;
+  z-index: 110;
+
+  height: 4rem;
+  margin: 1rem 0;
+  padding: .5rem;
+
+  border: 5px solid #DE7F5B;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  /*background: #DCEDFF;*/
+  transition: .15s;
+}
+
+#title:hover {
+  background: white;
+  cursor: pointer;
+  filter: contrast(1.5);
+}
+
+
+
+#BG {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 110%;
+  height: 110vh;
+
+  -webkit-animation: rotate 5s linear 0s infinite;
+  -o-animation: rotate 5s linear 0s infinite;
+  animation: rotate 5s linear 0s infinite;
+}
+
+@keyframes rotate {
+  to {filter: hue-rotate(360deg);}
+}
+
+
+svg  {  
+  max-width: 30rem;
+  /*filter: drop-shadow(0 0 10px black);*/
+  max-width: 100%;
+  max-height: 100%;
+  width: 100%;
+  height: 100%;
+  transition: .3s;
+}
+
+svg * {
+  cursor: pointer;
+}
+
+
+#canvas {
+  padding: 1rem 0;
+  /*width: 50%;*/
+  height: 10rem;
+  display: flex;
+  position: absolute;
+  margin-bottom: -1rem;
+  /*left: 50%;*/
+  top: 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+
+#canvas .SVGbox { 
+  position: relative; 
+  width: 10rem;
+  min-width: 10rem;
+  height: 5rem;
+
+  border: 5px solid #DE7F5B;
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+  /*background: #DCEDFF;*/
+  
+  margin: 0 1rem 2rem;
+  padding: 0 1rem;
+  overflow: hidden;
+}
+
+#canvas .SVGbox h2 {  
+  position: absolute;
+  z-index: 1;
+}
+#canvas .SVGbox h3 {  
+  position: absolute;
+  z-index: 1;
+  margin-top: 8rem;
+}
+
+#canvas .SVGbox svg {  
+  /*margin-top: -4rem;*/
+  height: 10rem;
+  width: 10rem;
+  z-index: -1;
+  position: absolute;
+}
+
+#canvas #activeSVG {
+  width: auto;
+  height: 70%;
+  position: fixed;
+  bottom: 2rem;
+  left: 17rem;
+  z-index: 50;
+}
+
+
+#toolkits {
+  width: 22rem;
+  padding: 4rem 1rem 1rem;
+  height: 100%;
+  transition: .3s ease;
+}
+
+#toolBar {
+  width: 4rem;
+  height: 20rem;
+  position: fixed;
+  z-index: 100;
+  left: 12rem;
+  bottom: 2rem;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-end;
+}
+
+#toolBar div svg {
+  width: 3rem;
+  height: 3rem;
+  margin-top: 2rem;
+  filter: drop-shadow(5px 5px 0 white);
+  transition: .15s;
+
+}
+#toolBar div svg:hover {
+  filter: drop-shadow(7px 7px 0 white);
+}
+#toolBar div * {
+  fill: black;
+}
+#toolBar div:hover * {
+  fill: red;
+  filter: drop-shadow(5px 5px 0 white);
+}
+
+.activeTool {
+  fill: green !important;
+}
+
+
+.eyeDrop {
+  cursor: crosshair !important;
+}
+
+#pickerButton {
+  position: absolute;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 0 100% 100% 100%;
+  background: black;
+  border: 5px solid black;
+  transform-origin: 50% 50%;
+}
+
+
+
+#swatches {
+  display: flex;
+  position: fixed;
+  bottom: 30%;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.swatch {
+  height: 20px;
+  flex-grow: 1;
+
+  border-radius: 10px;
+  margin: 5px;
+  background: gray;
+  box-shadow: 0 0 20px white;
+  text-align: center;
+  cursor: pointer;
+
+}
+
+#colorPicker {
+  width: 10rem;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  /*transform: rotateZ(90deg);*/
+  /*transform: rotateZ(180deg);*/
+
+  cursor: crosshair;
+  background: url(img/hslv.png);
+  background-size: 100% 100%;
+  opacity: .95;
+  z-index: 70;
+}
+
+
+
+
+.colorBar {
+  width: 100%;
+  display: flex;
+  /*flex-grow: 1;*/
+
+  transition: .1s ease;
+/*  -webkit-animation: float 20s ease-in-out 0s infinite;
+  -o-animation: float 20s ease-in-out 0s infinite;
+  animation: float 20s ease-in-out 0s infinite;
+*/}
+
+ .colorSlice {
+  width: .25rem;
+  height: .075rem;
+}
+
+
+@keyframes float {
+  0% {
+    margin-top: 0;
+  }
+  25% {
+    margin-top: -20px;
+  }
+  75% {
+    margin-top: 20px;
+  }
+  0% {
+    margin-top: 0;
+  }
+}
+
+.colorSlice:hover {
+  transform: scale(1.2);
+  transition: .1s;
+}
+
+.activeSlice {
+  transform: scale(100) !important;
+  /*height: 4rem !important;*/
+  background: white !important;
+  /*flex-grow: 1; */
+}
