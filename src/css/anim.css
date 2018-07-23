@@ -1,0 +1,15 @@
+
+
+
+.avatar {
+	-webkit-animation: hueTate 10s linear 0s infinite;
+	-o-animation: hueTate 10s linear 0s infinite;
+	animation: hueTate 10s linear 0s infinite;
+}
+
+
+@keyframes hueTate {
+	to {
+		filter: hue-rotate(360deg);
+	}
+}
