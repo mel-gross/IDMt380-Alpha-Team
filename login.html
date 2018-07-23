@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login/Sign-up Aurora</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="login.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="css/login.css" />
 <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great|Lato" rel="stylesheet">
 </head>
 <body>
@@ -24,7 +24,7 @@
         <h1 id="heading-four" class="no-display"> Choose an Avatar for Your Account</h1>
 
         
-       <form id="sign-up">
+       <form id="sign-up" method="POST" action="home.php">
         <input type="text" id="first-name" name="first-name" class="reveal" placeholder="Fist Name" required>
         <input type="text" id="last-name" name="last-name" class="reveal" placeholder="Last Name" required>
         <input type="text" id="new-username" name="new-username" class="no-display" placeholder="Username" required>
@@ -86,14 +86,11 @@
     </div>
 <div id="login-form-container" class="no-reveal-form">
     <h1 class="reveal">Sign in to Your Account!</h1>
-    <form id="login">
+    <form id="login" method="POST" action="home.php">
         <input type="text" name="username" id="username" class="reveal" placeholder="username" required>
         <input type="text" name="password" id="password" class="reveal" placeholder="password" required>
         <input type="submit" name="login" id="login-btn" class="reveal" value="LOGIN">
     </form>
-
-   
-
 </div>
 
 
@@ -102,7 +99,7 @@
 
 <footer></footer>
 
-<script src="login.js"></script>
+<script src="js/login.js"></script>
 </body>
 
 </html>

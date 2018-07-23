@@ -10,7 +10,7 @@ header {
 main {
     height: auto;
     min-height: calc(100vh - 70px);
-    background-image: url(img/bg-login.svg);
+    background-image: url(../img/bg-login.svg);
     background-size: cover;
     align-items: center;
     padding-bottom: 50px;
