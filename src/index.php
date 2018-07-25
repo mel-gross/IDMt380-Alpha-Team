@@ -2,7 +2,7 @@
 	
 <main class="content" id="content">
 	<section class="about" id="about">
-		<h3>Welcome to AURORA! <br>Tap on me if you have any questions.</h3>
+		<h3>My name is Aurora! Welcome aboard. <br>Choose the drawing you want to color below or click here for help. <br> Let’s paint!</h3>
 		<img class="avatar" id="avatar" src="img/auroraAvatar.png" alt="">
 	</section>
 	
