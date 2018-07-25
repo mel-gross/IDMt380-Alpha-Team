@@ -6,27 +6,30 @@
 	<title>Coloring Book Alpha</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/anim.css">
-	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">   <!-- Display Font: Lato -->
-    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">  <!-- Body Font: Fredericka the Great -->
+	<!-- V V Replace with local font folder V V -->
+	<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
 </head>
 
 <body onload="load()">
+
+<div id="wrapper" class="wrapper">
 
 	<section class="nav" id="nav">
 
 
 <!-- NOTE: research how to get relative link to home page -->
-	<a href="index.php"><img id="title" src="img/auroraLogo.png" alt=""></a>
+	<img id="title" src="img/auroraLogoL.png" alt="">
 
 		<div class="hamburger" id="hamburger">
 			<div class="menu" id="menu">
-				<div id="help" class="icon hide">
+				<div id="helpBtn" class="icon hide">
 					<img src="icon/auroraIcon.png" alt="">
 				</div>
-				<div id="user" class="icon">
+				<div id="userBtn" class="icon">
 					<?php include 'icon/login.svg'; ?>
 				</div>
-				<div id="Xout" class="icon hide">
+				<div id="XoutBtn" class="icon hide">
 					<?php include 'icon/Xout.svg'; ?>
 				</div>
 			</div>

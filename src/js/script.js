@@ -2,10 +2,15 @@
 
 function load() {
 	defaultCanvas();
-	// randomizeSwatches();
+	randomizeSwatches();
 	changeColor(activeHue,activeSat,activeLit);
 }
 
+
+
+var activeHue = 200;
+var activeSat = 100;
+var activeLit = 60;
 
 
 
@@ -13,16 +18,11 @@ function defaultCanvas() {
   $('#gallery svg *, #gallery svg g *').css("fill", "#ffffff" );
   $('#gallery svg *, #gallery svg g *').css( "stroke", "#000000");
   $('#gallery svg *, #gallery svg g *').css( "stroke-width", "1px");
-
-  // $('#gallery svg:first-child').addClass('activeSVG');
-
+  $('#gallery svg:first-child').addClass('activeSVG');
 }
 
 
-
-
 $('#gallery svg *, #gallery svg g *').click(function(){
-
   $(this).css("fill", activeColor);
 });
 
@@ -63,11 +63,6 @@ $('#gallery svg *, #gallery svg g *').click(function(){
 
 
 
-
-
-var activeHue = 200;
-var activeSat = 100;
-var activeLit = 60;
 
 
 //  TOOL KIT
@@ -113,19 +108,15 @@ var marker = false;
 // });
 
 
+var w = colorPicker.clientWidth;
+var	h = colorPicker.clientHeight;
 
 
 $('#colorPicker').mousedown(function () {
-
-
-	x = event.clientX - $('#colorPicker').offset().left;
-	y = event.clientY - $('#colorPicker').offset().top;
-	
-	var w = colorPicker.clientWidth;
-	var h = colorPicker.clientHeight;
+	mousePos();
 
 	activeHue = Math.floor(360*x/w);
-	activeLit = Math.floor(100*y/h);
+	activeLit = 100 - Math.floor(100*y/h);
 
 	console.log("x = " + activeHue + ", y = " + activeLit);
 
@@ -136,23 +127,20 @@ $('#colorPicker').mousedown(function () {
 });
 
 
+function mousePos() {
+	x = event.clientX - $('#colorPicker').offset().left;
+	y = event.clientY - $('#colorPicker').offset().top;
+
+}
 
 
 function changeColor(hue,sat,lit) {
 	activeColor = "hsl(" + hue + ", " + sat + "%, " + lit + "%)";
 	console.log(activeColor);
-	// activeSwatch.style.background = activeColor;
-	// activeSwatch.style.boxShadow = "0 0 20px " + activeColor;
 
+	activeSwatch.style.background = activeColor;
 	pickerButton.style.background = activeColor;
-
-	// activeSwatch.value = activeColor;
-	// activeSwatch.innerHTML = activeColor;
-
-	// if (activeLit > 50) {activeSwatch.style.color = 'black';}
-	// else {activeSwatch.style.color = 'white';}
-
-
+	activeSwatch.value = activeColor;
 
 
 }
@@ -161,7 +149,6 @@ function changeColor(hue,sat,lit) {
 
 function randomizeSwatches() {
 	for (var i = 0; i < swatches.children.length; i++) {
-
 		activeHue = Math.floor(Math.random() * 360);
 		activeLit = Math.floor(25 + Math.random() * 51);
 
@@ -170,16 +157,34 @@ function randomizeSwatches() {
 		activeColor =  "hsl(" + activeHue + ", " + activeSat + "%, " + activeLit + "%)";
 
 		swatches.children[i].style.background = activeColor;
-		swatches.children[i].style.boxShadow = "0 0 20px " + activeColor;
 		swatches.children[i].value = activeColor;
-		swatches.children[i].innerHTML = activeColor;
-		pickerButton.style.left = activeHue + "px";
-		pickerButton.style.top = activeLit + "px";
-
-		if (activeLit > 50) {swatches.children[i].style.color = 'black';}
-		else {swatches.children[i].style.color = 'white';}
+		movePicker();
 
 	}
+}
+
+
+
+
+
+$('.swatch').click(function() {
+	$('.swatch').attr("id","not");
+	$(this).attr("id","activeSwatch");
+	var colorArray = getRgbArray($(this).css('background'), false, 'hsl');
+
+	changeColor(colorArray[0], colorArray[1], colorArray[2]);
+	console.log(colorArray);
+
+	movePicker(colorArray[0],colorArray[2]);
+
+});
+
+
+function movePicker(left, top) {
+	pickerButton.style.left = (w*left/360) + "px";
+	pickerButton.style.top = (h*(1-top/100)) + "px";
+
+	console.log("picker left = " + pickerButton.style.left + ", picker top = " + pickerButton.style.top);
 }
 
 
@@ -187,65 +192,44 @@ function randomizeSwatches() {
 // UI INTERACTIONS
 
 
-$('.swatch').click(function() {
-	$('.swatch').attr("id","not");
-	$(this).attr("id","activeSwatch");
-	// changeColor(activeHue, activeSat, activeLit);
-
-});
-
+$('#title').click(function(){closeModals()});
+$('#userBtn').click(function(){openModal('#userModal')});
+$('#helpBtn, #avatar').click(function(){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
-
-	$('#gallery .SVGbox').attr("id","not");
-	$(this).attr("id","activeSVG");
-	$('#toolkits, #help, #Xout').removeClass('hide');
-
-	// $(this).children('svg').css("height", (document.clientHeight - 240 + "px"));
-
-});
-
-
-$('#Xout').click(function() {
-	$('#gallery .SVGbox').attr("id","not");	
-	$('#toolkits, #help, #Xout').addClass('hide');
+	openModal(this);
+	$('#toolkits').removeClass('hide');
+	title.src = "img/auroraLogo.png";
 });
 
 
 
-$('#avatar, #help').click(function() {
-	$('#helpModal').toggleClass('hide');
-	var isHidden = $('#help').hasClass('hide');
-	console.log(isHidden);
-	if (isHidden) {
-		$('#help').removeClass('hide');
+
+function openModal(modal) {
+	if ($(modal).hasClass('activeModal') && (!$(modal).hasClass('SVGbox'))) {
+		closeModals();
+	}else {
+		$('*').removeClass('activeModal');
+		$(modal).addClass('activeModal');
 	}
-	else {
-		$('#help').addClass('hide');
-	}
-});
+}
 
-
-$('#user').click(function() {
-	$('#user').css('fill', 'green');
-	$('#userModal').toggleClass('hide');
-})
-
-
-function hideThings() {
-	$('#gallery .SVGbox').attr("id","not");		
-	$('.modal, #toolkits, #Xout').addClass('hide');
+function closeModals() {
+	$('*').removeClass('activeModal');
+	$('.toolkits').addClass('hide');
+	title.src = "img/auroraLogoL.png";
 };
 
 
 
 
 $(window).scroll(function() {
-	if ($(document).scrollTop() > 300) {
+	if ($('#wrapper').scrollTop() > 300) {
 		$('#avatar').addClass('hide');
-		$('#help').removeClass('hide');
+		$('#helpBtn').removeClass('hide');
 	} else {
 		$('#avatar').removeClass('hide');
-		$('#help').addClass('hide');
+		$('#helpBtn').addClass('hide');
+
 	}
 })
