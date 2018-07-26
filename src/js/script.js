@@ -2,8 +2,8 @@
 
 function load() {
 	defaultCanvas();
-	randomizeSwatches();
-	changeColor(activeHue,activeSat,activeLit);
+	$('svg').addClass('svg');
+	// randomizeSwatches();
 }
 
 
@@ -15,10 +15,9 @@ var activeLit = 60;
 
 
 function defaultCanvas() {
-  $('#gallery svg *, #gallery svg g *').css("fill", "#ffffff" );
-  $('#gallery svg *, #gallery svg g *').css( "stroke", "#000000");
+  $('#gallery svg *, #gallery svg g *').css("fill", "#777" );
+  $('#gallery svg *, #gallery svg g *').css( "stroke", "#000");
   $('#gallery svg *, #gallery svg g *').css( "stroke-width", "1px");
-  $('#gallery svg:first-child').addClass('activeSVG');
 }
 
 
@@ -108,13 +107,12 @@ var marker = false;
 // });
 
 
-var w = colorPicker.clientWidth;
-var	h = colorPicker.clientHeight;
-
+var x, y, w, h;
 
 $('#colorPicker').mousedown(function () {
-	mousePos();
 
+	x = event.clientX - $('#colorPicker').offset().left;
+	y = event.clientY - $('#colorPicker').offset().top;
 	activeHue = Math.floor(360*x/w);
 	activeLit = 100 - Math.floor(100*y/h);
 
@@ -122,30 +120,23 @@ $('#colorPicker').mousedown(function () {
 
 	pickerButton.style.left = x + "px";
 	pickerButton.style.top = y + "px";
-
 	changeColor(activeHue, activeSat, activeLit);
 });
 
-
-function mousePos() {
-	x = event.clientX - $('#colorPicker').offset().left;
-	y = event.clientY - $('#colorPicker').offset().top;
-
-}
 
 
 function changeColor(hue,sat,lit) {
 	activeColor = "hsl(" + hue + ", " + sat + "%, " + lit + "%)";
 	console.log(activeColor);
-
 	activeSwatch.style.background = activeColor;
+	swatches.style.background = activeColor;
 	pickerButton.style.background = activeColor;
 	activeSwatch.value = activeColor;
-
-
 }
 
 
+
+var swatchOpened = false;
 
 function randomizeSwatches() {
 	for (var i = 0; i < swatches.children.length; i++) {
@@ -158,13 +149,11 @@ function randomizeSwatches() {
 
 		swatches.children[i].style.background = activeColor;
 		swatches.children[i].value = activeColor;
+		changeColor(activeHue,activeSat,activeLit);
 		movePicker();
 
 	}
 }
-
-
-
 
 
 $('.swatch').click(function() {
@@ -173,14 +162,39 @@ $('.swatch').click(function() {
 	var colorArray = getRgbArray($(this).css('background'), false, 'hsl');
 
 	changeColor(colorArray[0], colorArray[1], colorArray[2]);
-	console.log(colorArray);
-
 	movePicker(colorArray[0],colorArray[2]);
 
 });
 
 
+// Show color picker when you click a swatch, and hide it when you idle 
+
+var idleInterval;
+var idleTime = 0;
+
+$('#toolkits').click(function(){
+	$(this).addClass('showRainbow');
+	clearInterval(idleInterval);
+    idleInterval = setInterval(timer, 1000); // 3 seconds
+});
+
+$('.swatch, #colorPicker, #gallery svg').click(function() {
+        idleTime = 0;
+    });
+$('.SVGbox').click(()=>{$('#toolkits').removeClass('showRainbow');});
+
+function timer() {
+    idleTime++;
+    if (idleTime > 2) {
+        $('#toolkits').removeClass('showRainbow');
+        idleTime = 0;
+    }
+}
+
+
 function movePicker(left, top) {
+	w = colorPicker.clientWidth;
+	h = colorPicker.clientHeight;
 	pickerButton.style.left = (w*left/360) + "px";
 	pickerButton.style.top = (h*(1-top/100)) + "px";
 
@@ -194,12 +208,20 @@ function movePicker(left, top) {
 
 $('#title').click(function(){closeModals()});
 $('#userBtn').click(function(){openModal('#userModal')});
-$('#helpBtn, #avatar').click(function(){openModal('#helpModal')});
+$('#helpBtn').click(function(){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
 	openModal(this);
 	$('#toolkits').removeClass('hide');
 	title.src = "img/auroraLogo.png";
+	nav.style.background = 'transparent';
+	$('#title, .icon svg').css('filter','none');
+	$('.icon svg path').css('fill','#2f2f2f');
+
+	if (!swatchOpened) {
+		setTimeout(() => {randomizeSwatches();}, 500);		
+		swatchOpened = true;
+	}
 });
 
 
@@ -209,7 +231,10 @@ function openModal(modal) {
 	if ($(modal).hasClass('activeModal') && (!$(modal).hasClass('SVGbox'))) {
 		closeModals();
 	}else {
+		title.src = "img/auroraLogoL.png";
 		$('*').removeClass('activeModal');
+
+		$('.icon svg path').css('fill','#f5f5f5');
 		$(modal).addClass('activeModal');
 	}
 }
@@ -217,7 +242,11 @@ function openModal(modal) {
 function closeModals() {
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
+
 	title.src = "img/auroraLogoL.png";
+	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
+	$('.icon svg path').css('fill','#f5f5f5');
+	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
 };
 
 
@@ -233,3 +262,8 @@ $(window).scroll(function() {
 
 	}
 })
+
+
+
+
+

@@ -23,8 +23,8 @@
 
 		<div class="hamburger" id="hamburger">
 			<div class="menu" id="menu">
-				<div id="helpBtn" class="icon hide">
-					<img src="icon/auroraIcon.png" alt="">
+				<div id="helpBtn" class="icon">
+					<?php include 'icon/help.svg'; ?>
 				</div>
 				<div id="userBtn" class="icon">
 					<?php include 'icon/login.svg'; ?>

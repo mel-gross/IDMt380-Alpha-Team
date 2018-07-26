@@ -7,11 +7,11 @@
 	</div>
 
 	<div id="swatches">
-		<div class="swatch" id="activeSwatch"></div>
+		<div class="swatch"></div>
 		<div class="swatch "></div>
 		<div class="swatch "></div>
 		<div class="swatch "></div>
-		<div class="swatch "></div>
+		<div class="swatch " id="activeSwatch"></div>
 	</div>
 		
  	<!-- <p>BRUSH WIDTH: </p><input id="brushWidth" type="range" min="10" max="200" value="100" onchange="checkVal()"> -->
