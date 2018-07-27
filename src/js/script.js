@@ -28,14 +28,14 @@ $('#gallery svg *, #gallery svg g *').click(function(){
 
 // var brushing = setInterval(brush,50);
 
-// var bwidth = brushWidth.value;
-// function checkVal() {
-// 	bwidth = brushWidth.value;
-// 	clearInterval(brushing);
-// 	console.log(10 + bwidth/2);
-// 	brushing = setInterval(brush,(10 + bwidth/2));
+var scaleTo = changeScale.value;
+var check = setInterval(scaleVal,10);
 
-// }
+function scaleVal() {
+	scaleTo = changeScale.value;
+	$('.activeModal svg').css('transform','scale(' + scaleTo/10 + ')');
+
+}
 
 
 // var xi, yi;
@@ -109,29 +109,54 @@ var marker = false;
 
 var x, y, w, h;
 
-$('#colorPicker').mousedown(function () {
+document.addEventListener('mousemove', onMouseUpdate, false);
 
-	x = event.clientX - $('#colorPicker').offset().left;
-	y = event.clientY - $('#colorPicker').offset().top;
+var down = false;
+$('#colorPicker').mousedown(function() {
+	down=true;
+	idleTime=0;
+});
+
+$('#colorPicker').click(function(){
+	idleTime=0;
+	x =  event.clientX - $('#colorPicker').offset().left;
+	y =  event.clientY - $('#colorPicker').offset().top;
+	clickMove(x, y);
+});
+
+$('#colorPicker').mouseup(function() {down = false;});
+
+function onMouseUpdate(e) {
+	console.log('hey');
+	x =  e.clientX - $('#colorPicker').offset().left;
+	y =  e.clientY - $('#colorPicker').offset().top;
+	console.log("x = " + x + ", y = " + x);
+
+	if (x > 0 && y > 0 && down) {
+		idleTime=0;
+		clickMove(x, y);
+	}
+
+}
+
+function clickMove(x, y) {
 	activeHue = Math.floor(360*x/w);
 	activeLit = 100 - Math.floor(100*y/h);
 
-	console.log("x = " + activeHue + ", y = " + activeLit);
-
 	pickerButton.style.left = x + "px";
 	pickerButton.style.top = y + "px";
-	changeColor(activeHue, activeSat, activeLit);
-});
-
+	changeColor(activeHue, activeSat, activeLit);	
+}
 
 
 function changeColor(hue,sat,lit) {
 	activeColor = "hsl(" + hue + ", " + sat + "%, " + lit + "%)";
 	console.log(activeColor);
+
 	activeSwatch.style.background = activeColor;
 	swatches.style.background = activeColor;
 	pickerButton.style.background = activeColor;
-	activeSwatch.value = activeColor;
+
 }
 
 
@@ -139,9 +164,23 @@ function changeColor(hue,sat,lit) {
 var swatchOpened = false;
 
 function randomizeSwatches() {
-	for (var i = 0; i < swatches.children.length; i++) {
-		activeHue = Math.floor(Math.random() * 360);
-		activeLit = Math.floor(25 + Math.random() * 51);
+		var scheme1 = ['#720066','#ffba40','#86fff7'];
+		var scheme2 = ['#FF0000','#00FF00','#0000FF'];
+		var scheme3 = ['#123456','#654321','#abcdef'];
+		var scheme4 = ['#ffffff','#ff0022','#333333'];
+
+		var schemes = [scheme1,scheme2,scheme3,scheme4];
+
+		var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
+		console.log(theScheme);
+
+		for (var i = 0; i < swatches.children.length; i++) {
+
+		// activeHue = Math.floor(Math.random() * 360);
+		// activeLit = Math.floor(25 + Math.random() * 51);
+
+		activeHue = getRgbArray(theScheme[i], false, 'hsl')[0];
+		activeLit = getRgbArray(theScheme[i], false, 'hsl')[2];
 
 		console.log(swatches.children[i]);
 
@@ -160,7 +199,7 @@ $('.swatch').click(function() {
 	$('.swatch').attr("id","not");
 	$(this).attr("id","activeSwatch");
 	var colorArray = getRgbArray($(this).css('background'), false, 'hsl');
-
+	idleTime=0;
 	changeColor(colorArray[0], colorArray[1], colorArray[2]);
 	movePicker(colorArray[0],colorArray[2]);
 
@@ -172,20 +211,26 @@ $('.swatch').click(function() {
 var idleInterval;
 var idleTime = 0;
 
-$('#toolkits').click(function(){
-	$(this).addClass('showRainbow');
-	clearInterval(idleInterval);
-    idleInterval = setInterval(timer, 1000); // 3 seconds
+$('#toolkits').on('doubletap',function(event){
+	showRainbow('#toolkits');
 });
 
-$('.swatch, #colorPicker, #gallery svg').click(function() {
-        idleTime = 0;
-    });
+$('#toolkits').dblclick(function(){
+	showRainbow('#toolkits');
+});
+
+function showRainbow(that) {
+	$(that).addClass('showRainbow');
+	clearInterval(idleInterval);
+    idleInterval = setInterval(timer, 1000); 
+}
+
+
 $('.SVGbox').click(()=>{$('#toolkits').removeClass('showRainbow');});
 
 function timer() {
     idleTime++;
-    if (idleTime > 2) {
+    if (idleTime > 3) {
         $('#toolkits').removeClass('showRainbow');
         idleTime = 0;
     }
@@ -240,6 +285,8 @@ function openModal(modal) {
 }
 
 function closeModals() {
+	$('.activeModal svg').css('transform','scale(1)');
+	changeScale.value = 10;
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
 
@@ -266,4 +313,6 @@ $(window).scroll(function() {
 
 
 
+
+// Gradient Fill
 

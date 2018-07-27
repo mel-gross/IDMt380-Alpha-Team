@@ -174,7 +174,9 @@ p {
 }
 
 .toolkits .colorPicker,
-.toolkits #swatches {
+.toolkits #swatches,
+.toolkits #changeScale
+ {
 	transform: translateY(6rem);
 }
 
@@ -207,24 +209,35 @@ p {
 	bottom: 6rem;
 	left: 0;
 	padding: .5rem 1rem;
-	border: 2px solid black;
+	border: 1px solid black;
 	width: 100%;
+	cursor: pointer; 
 }
 
 .swatch {
 	height: 1.5rem;
+	flex: 1 0 30%;
 	width: 3rem;
 	margin-right: 1rem;
-	border: 2px solid black;
+	border: 1px solid black;
 	border-radius: 2px;
 	transition: .2s;
 	cursor: pointer;
 }
 
 #activeSwatch {
-	border-color: transparent;
+	border-color: white;
 	background: transparent;
-	cursor: default;
+}
+
+#changeScale {
+	position: fixed;
+	bottom: 10rem;
+	left: 2rem;
+	height: 2rem;
+	width: 10rem;
+	background: black;
+	padding: .5rem;
 }
 
 
@@ -281,12 +294,14 @@ p {
 	position: fixed;
 	top: 2rem;
 	margin-left: 2rem;
+	text-shadow: 0 0 10px white;
 }
 
 .activeModal.SVGbox p {
 	position: fixed;
 	top: 6rem;
 	margin-left: 4rem;
+	text-shadow: 0 0 10px white;
 }
 
 .activeModal.SVGbox svg {

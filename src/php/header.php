@@ -18,7 +18,8 @@
 	<section class="nav" id="nav">
 
 
-<!-- NOTE: research how to get relative link to home page -->
+
+	<h1 style="display: none;">Aurora, The Natural Painting App</h1>
 	<img id="title" src="img/auroraLogoL.png" alt="">
 
 		<div class="hamburger" id="hamburger">
@@ -35,3 +36,5 @@
 			</div>
 		</div>
 	</section>
+
+
