@@ -8,6 +8,10 @@
 
 	<div id="swatches">
 		<div class="swatch"></div>
+<<<<<<< HEAD
+=======
+		<div class="swatch "></div>
+>>>>>>> d1b74b5f7b6e043cea318f6c66d4ee959bf072cc
 		<div class="swatch "></div>
 		<div class="swatch " id="activeSwatch"></div>
 	</div>

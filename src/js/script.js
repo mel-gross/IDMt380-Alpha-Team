@@ -15,9 +15,17 @@ var activeLit = 60;
 
 
 function defaultCanvas() {
+<<<<<<< HEAD
   $('#gallery svg *, #gallery svg g *').css("fill", "#777" );
   $('#gallery svg *, #gallery svg g *').css( "stroke", "#000");
   $('#gallery svg *, #gallery svg g *').css( "stroke-width", "1px");
+=======
+	$("[data-name='outline'], [data-name='outlines']").css('pointer-events','none');
+	
+  // $('#gallery svg *, #gallery svg g *').css("fill", "#777" );
+  // $('#gallery svg *, #gallery svg g *').css( "stroke", "#000");
+  // $('#gallery svg *, #gallery svg g *').css( "stroke-width", "1px");
+>>>>>>> d1b74b5f7b6e043cea318f6c66d4ee959bf072cc
 }
 
 
@@ -127,10 +135,17 @@ $('#colorPicker').click(function(){
 $('#colorPicker').mouseup(function() {down = false;});
 
 function onMouseUpdate(e) {
+<<<<<<< HEAD
 	console.log('hey');
 	x =  e.clientX - $('#colorPicker').offset().left;
 	y =  e.clientY - $('#colorPicker').offset().top;
 	console.log("x = " + x + ", y = " + x);
+=======
+	// console.log('hey');
+	x =  e.clientX - $('#colorPicker').offset().left;
+	y =  e.clientY - $('#colorPicker').offset().top;
+	// console.log("x = " + x + ", y = " + x);
+>>>>>>> d1b74b5f7b6e043cea318f6c66d4ee959bf072cc
 
 	if (x > 0 && y > 0 && down) {
 		idleTime=0;
