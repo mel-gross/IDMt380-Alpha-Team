@@ -15,23 +15,24 @@ var activeLit = 60;
 
 
 function defaultCanvas() {
-<<<<<<< HEAD
-  $('#gallery svg *, #gallery svg g *').css("fill", "#777" );
-  $('#gallery svg *, #gallery svg g *').css( "stroke", "#000");
-  $('#gallery svg *, #gallery svg g *').css( "stroke-width", "1px");
-=======
 	$("[data-name='outline'], [data-name='outlines']").css('pointer-events','none');
 	
-  // $('#gallery svg *, #gallery svg g *').css("fill", "#777" );
-  // $('#gallery svg *, #gallery svg g *').css( "stroke", "#000");
-  // $('#gallery svg *, #gallery svg g *').css( "stroke-width", "1px");
->>>>>>> d1b74b5f7b6e043cea318f6c66d4ee959bf072cc
 }
 
 
-$('#gallery svg *, #gallery svg g *').click(function(){
+$('#gallery svg *, #gallery svg g *').mousedown(function(){
   $(this).css("fill", activeColor);
 });
+
+$('#gallery svg *, #gallery svg g *').hover(function(){
+	if (down) {
+	  	$(this).css("fill", activeColor);		
+	}
+});
+
+
+// $('#gallery svg *, #gallery svg g *').click(function(){
+
 
 
 // var brushing = setInterval(brush,50);
@@ -120,32 +121,23 @@ var x, y, w, h;
 document.addEventListener('mousemove', onMouseUpdate, false);
 
 var down = false;
-$('#colorPicker').mousedown(function() {
-	down=true;
-	idleTime=0;
+$('#colorPicker, .SVGbox').mousedown(()=> {
+	down = true;
+	idleTime = 0;
 });
 
 $('#colorPicker').click(function(){
-	idleTime=0;
-	x =  event.clientX - $('#colorPicker').offset().left;
-	y =  event.clientY - $('#colorPicker').offset().top;
+	idleTime = 0;
+	x = event.clientX - $('#colorPicker').offset().left;
+	y = event.clientY - $('#colorPicker').offset().top;
 	clickMove(x, y);
 });
 
-$('#colorPicker').mouseup(function() {down = false;});
+$('#colorPicker, .SVGbox').mouseup(()=> {down = false;});
 
 function onMouseUpdate(e) {
-<<<<<<< HEAD
-	console.log('hey');
-	x =  e.clientX - $('#colorPicker').offset().left;
-	y =  e.clientY - $('#colorPicker').offset().top;
-	console.log("x = " + x + ", y = " + x);
-=======
-	// console.log('hey');
-	x =  e.clientX - $('#colorPicker').offset().left;
-	y =  e.clientY - $('#colorPicker').offset().top;
-	// console.log("x = " + x + ", y = " + x);
->>>>>>> d1b74b5f7b6e043cea318f6c66d4ee959bf072cc
+	x = e.clientX - $('#colorPicker').offset().left;
+	y = e.clientY - $('#colorPicker').offset().top;
 
 	if (x > 0 && y > 0 && down) {
 		idleTime=0;
@@ -217,7 +209,6 @@ $('.swatch').click(function() {
 	idleTime=0;
 	changeColor(colorArray[0], colorArray[1], colorArray[2]);
 	movePicker(colorArray[0],colorArray[2]);
-
 });
 
 
@@ -266,9 +257,9 @@ function movePicker(left, top) {
 // UI INTERACTIONS
 
 
-$('#title').click(function(){closeModals()});
-$('#userBtn').click(function(){openModal('#userModal')});
-$('#helpBtn').click(function(){openModal('#helpModal')});
+$('#title').click(() => {closeModals()});
+$('#userBtn').click(() => {openModal('#userModal')});
+$('#helpBtn').click(() => {openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
 	openModal(this);
@@ -293,8 +284,14 @@ function openModal(modal) {
 	}else {
 		title.src = "img/auroraLogoL.png";
 		$('*').removeClass('activeModal');
-
-		$('.icon svg path').css('fill','#f5f5f5');
+		if ($(modal).is('#userModal')) {			
+			$('#userBtn svg path').css('fill','#ffba40');
+			$('#helpBtn svg path').css('fill','#f5f5f5');
+		}
+		if ($(modal).is('#helpModal')) {			
+			$('#helpBtn svg path').css('fill','#86fff7');
+			$('#userBtn svg path').css('fill','#f5f5f5');
+}
 		$(modal).addClass('activeModal');
 	}
 }
@@ -307,7 +304,8 @@ function closeModals() {
 
 	title.src = "img/auroraLogoL.png";
 	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
-	$('.icon svg path').css('fill','#f5f5f5');
+	$('#userBtn svg path').css('fill','#f5f5f5');
+	$('#helpBtn svg path').css('fill','#f5f5f5');
 	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
 };
 
@@ -323,7 +321,7 @@ $(window).scroll(function() {
 		$('#helpBtn').addClass('hide');
 
 	}
-})
+});
 
 
 

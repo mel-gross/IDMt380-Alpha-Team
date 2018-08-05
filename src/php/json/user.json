@@ -48,12 +48,5 @@
         "password": "pass1234",
         "avatar": "snake",
         "saved_work": []
-    },
-    {
-        "user_id": 4,
-        "username": "alex",
-        "password": "alex",
-        "avatar": "koala",
-        "saved_work": []
     }
 ]
