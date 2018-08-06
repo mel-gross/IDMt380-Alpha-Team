@@ -9,8 +9,8 @@
 	<div id="swatches">
 		<div class="swatch"></div>
 		<div class="swatch "></div>
-		<div class="swatch "></div>
 		<div class="swatch " id="activeSwatch"></div>
+		<!-- <div class="erasor "></div> -->
 	</div>
 
 		

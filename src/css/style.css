@@ -5,9 +5,10 @@
 
 html {
 	font-size: 100%;
-	background: url(../img/canvasTexture.jpg);
-	background-position: center;
+	background: url(../img/aurora-borealis-loop1.gif), #2d2d3d; 
+	background-blend-mode: soft-light;
 	background-size: cover;
+	background-position: center;
 	color: #f3f3f3; 
 	letter-spacing: 1.5px;
 	line-height: 200%;
@@ -37,6 +38,9 @@ h1,h2,h3 {
 }
 
 p {
+	max-width: 40rem;
+}
+p, input, button {
 	font-family: 'Lato';	
 }
 
@@ -45,6 +49,7 @@ p {
 	height: 100vh;
 	overflow-y: auto;
 	overflow-x: hidden;
+	/*padding-right: 1rem;*/
 }
 
 
@@ -59,27 +64,29 @@ p {
 	top: 0;
 	left: 0;
 	z-index: 10;
-	padding: 2rem 2rem 0;
+	padding: 1rem 1rem 0;
 	width: 100%;
-	height: 5rem;
+	height: 3rem;
 	background: linear-gradient(rgba(0,0,10,.7) 0%, transparent);
+	pointer-events: none;
 }
 
 .menu {
 	display: flex;
-	flex-flow: column;
 }
 
-#title {transition: .2s;}
-#title:hover {
+#title {
+	transition: .2s;
+	pointer-events: all;
 	cursor: pointer;
-	filter: drop-shadow(0 0 10px white);
+	filter: drop-shadow(0 0 10px black);
 }
 
 .icon {
-	width: 3rem;
-	margin: 0 0 .5rem 0;
+	width: 2rem;
+	margin: 0 .5rem 0 0;
 	transition: .2s;
+	pointer-events: all;
 	cursor: pointer;
 }
 .icon svg {
@@ -103,21 +110,19 @@ p {
 }
 
 .about h3 {
-	margin-top: 20rem;
+/*	margin-top: 20rem;
 	margin-bottom: -25rem;
-}
+*/}
 
 .avatar {
-	max-width: 25rem;
-	min-width: 25rem;
+	max-width: 20rem;
+	min-height: 20rem;
 	transition: 1s ease;
 	transform: translateX(-4rem);
-	cursor: pointer;
+	/*cursor: pointer;*/
+	pointer-events: none;
 }
 
-.avatar:hover {
-	filter: drop-shadow(0 0 35px white);
-}
 
 
 .gallery {
@@ -125,45 +130,59 @@ p {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
+	padding: 0 1rem;
 }
 
-.gallery .SVGbox {
-	width: 100%;
-	max-width: 20rem;
-	height: 20rem;
+.SVGbox {
+	/*width: 100%;*/
+	/*flex-grow: 1 0 20%;*/
+	max-width: 30%;
+	min-width: 15rem;
+	height: 17rem;
 	background: url(../img/canvasTextureL.jpg);
+	/*background-blend-mode: hard-light;*/
 	background-size: cover;
 	background-position: center;
-	margin: 0 2rem 8rem;
-	padding: 2rem;
+	margin: 0 1rem 6rem;
+	padding: 1rem 0;
 	transition: .3s;
 	flex-grow: 1;
 }
 
+.SVGbox:not(.activeModal):hover {
+	cursor: pointer;
+}
+
 
 .gallery .SVGbox h2 {
-	margin: 2rem 0 0;
+	margin: 1rem 0 0 1rem;
 }
 
 .gallery .SVGbox svg {
-	width: 16rem;
-	height: 16rem;
+	width: 15rem;
+	height: 15rem;
 	pointer-events: none;
-	/*filter: drop-shadow(2px 2px 5px rgba(0,0,0,.3));*/
 
 }
+.gallery .SVGbox svg * {
+	cursor: pointer;
+}
+
 
 /* TOOL KITS */
 
-.toolkits {
-	position: fixed;
-	height: 10rem;
-	width: 100%;
-	bottom: 0;
-	left: 0;
-	z-index: 5;
-	color: black;
-	transition: .3s .2s;
+.toolkits,
+.toolkits *
+ {
+	transition: .2s;
+	z-index: 6;
+}
+
+.toolkits .colorPicker,
+.toolkits #swatches,
+.toolkits #changeScale
+ {
+	transform: translateY(6rem);
 }
 
 .colorPicker {
@@ -173,8 +192,11 @@ p {
 	background-size: 100% 6rem;
 	position: fixed;
 	bottom: 0;
+	left: 0;
+	cursor: pointer;
 
 }
+
 #pickerButton {
 	position: absolute;
 	bottom: 3rem;
@@ -183,22 +205,52 @@ p {
 	border-radius: 0 100% 100% 100%;
 	width: 40px;
 	height: 40px;
+	transition: 0s;
 }
 
 #swatches {
 	display: flex;
-	width: auto;
+	justify-content: space-between;
+	position: fixed;
+	bottom: 6rem;
+	left: 0;
+	padding: .5rem 1rem;
+	border: 1px solid black;
+	width: 100%;
+	cursor: pointer; 
 }
 
-.swatch {
+.swatch, .erasor {
 	height: 1.5rem;
+	flex: 1 0 30%;
 	width: 3rem;
-	margin: 0 0 1rem 1rem;
-	border: 2px solid black;
+	margin-right: 1rem;
+	border: 1px solid black;
+	border-radius: 2px;
 	transition: .2s;
+	cursor: pointer;
+	padding: 0;
 }
+
+.erasor {
+	margin-left: 2rem;
+	background: url(../icon/crossout.svg);
+	background-size:  3rem 1.5rem;
+}
+
 #activeSwatch {
-	border-color: skyblue;
+	border-color: white;
+	background: transparent;
+}
+
+#changeScale {
+	position: fixed;
+	bottom: 10rem;
+	left: 2rem;
+	height: 2rem;
+	width: 10rem;
+	background: black;
+	padding: .5rem;
 }
 
 
@@ -219,18 +271,154 @@ p {
 }
 
 
+.modalTitle {
+	padding-left: 1rem;
+	padding-top: 1rem;
+	/*padding-bottom: 2rem;*/
+	border-top: 1px solid white;
+	font-size: 2rem;
+}
+
+.SVGbox:not(.activeModal) .modalTitle {
+	position: relative;
+}
+
+
+
+/* USER SCREEN */
+
+
+.userModal {
+	background: url(../img/aurora-borealis-loop4.gif), #2d2d3d; 
+	background-blend-mode: soft-light;
+	background-size: cover;
+}
+
+.innerUserModal {
+	display: flex;
+	flex-flow: column wrap;
+	align-items: stretch;
+}
+
+.innerUserModal h2 {
+	margin: 1rem 0;
+}
+
+.signIn {
+	display: flex;
+	flex-flow: column;
+	width: 100%;
+	padding-left: 2rem;
+}
+
+.signIn input {
+	margin: 0 0 1rem 1rem;
+	padding: .33rem;
+	border: none;
+	background: #f5f5f5;
+}
+
+.info {
+	display: flex;
+	flex-flow: column;
+	align-items: center;
+	width: 20rem;
+}
+
+.info h2 {
+	/*margin: 0 0 1rem 1rem;*/
+}
+
+.info img {
+	width: 10rem;
+	height: 10rem;
+	border-radius: 100%;
+	border: 1px solid white;
+	margin-bottom: 1rem;
+	background: rgba(0,0,0,.3);
+	text-align: center;
+	padding-top: 4.5rem;
+	cursor: pointer;
+}
+
+
+
+.info button {
+	margin-left: 0;
+	width: 100%;
+}
+
+.infoBtn {
+	padding: .5rem;
+	margin: 0 0 1rem 2rem;
+	background: transparent;
+	border: 1px solid white;
+	color: white;
+	border-radius: 2px;
+	transition: .1s;
+}
+
+.infoBtn:hover {
+	background: #720066;
+	cursor: pointer;
+}
+
+#clearAllBtn {
+	border-color: pink;
+	color: pink;
+}
+
+.disabled {
+	color: gray;
+	border-color: gray;
+	pointer-events: none;
+}
+
+/* HELP SCREEN */
+
+.helpModal {
+	background: url(../img/aurora-borealis-loop2.gif), #2d2d3d; 
+	background-blend-mode: soft-light;
+	background-size: cover;
+	background-position: center;
+}
+
+.accordion {
+	cursor: pointer;
+	margin-bottom: 2rem;
+	margin-left: 2rem;
+}
+
+.accordion h2 {
+	padding: .5rem 0 1rem;
+	/*border-top: 1px solid white;*/
+}
+
+.accordion p {
+	margin-left: 1rem;
+	height: 0;
+	transition: .2s;
+	overflow-y: hidden;
+}
+
+
+
+
 /* TOGGLE CLASSES */
 
 .activeModal {
 	pointer-events: all;
+	overflow-y: auto;
 	position: fixed;
 	top: 0;
 	left: 0;
+	z-index: 7;
 	margin: 0 !important;
-	padding: 7rem 8rem 0 2rem;
+	padding: 4rem 1rem 0;
 	width: 100% !important;
 	max-width: 100% !important;
-	height: 100% !important;
+	/*height: 100% !important;*/
+	min-height: 100vh !important;
 	opacity: 1 !important;
 }
 
@@ -242,20 +430,30 @@ p {
 	margin: 0 !important;
 	padding: 0 !important;
 	opacity: 0 !important;
+	pointer-events: none;
 }
 
 
 .activeModal.SVGbox {
-	padding: 8rem 2rem;
-}
-
-.activeModal.SVGbox h3 {
-	position: fixed;
-	top: 6rem;
-	left: 0;
+	padding: 7rem 1rem 4rem;
 	color: black;
 	z-index: 5;
+}
 
+.activeModal.SVGbox h2 {
+	position: fixed;
+	top: 3rem;
+	left: 0;
+	padding-left: 2rem;
+	border-top: 1px solid black;
+	text-shadow: 0 0 10px white;
+}
+
+.activeModal.SVGbox p {
+	position: fixed;
+	top: 6rem;
+	margin-left: 4rem;
+	text-shadow: 0 0 10px white;
 }
 
 .activeModal.SVGbox svg {
@@ -266,6 +464,14 @@ p {
 }
 
 
+.showRainbow * {
+	transform: translateY(0) !important;
+}
+
+
+#expanded p {
+	height: auto;
+}
 
 
 /* TABLET */
@@ -277,24 +483,76 @@ p {
 	display: flex;
 	flex-flow: row;
 }
-.icon {
-	width: 4rem;
-	margin: 0 1rem 0 0;
-	transition: .2s;
-	cursor: pointer;
-}
 
 .about {
 	flex-flow: row-reverse;
+	justify-content: flex-end;
 }
 
+
 .about h3 {
-	margin-top: 10rem;
+	margin-top: 5rem;
 	margin-bottom: 0;
 	font-size: 200%;
 	max-width: 40rem;
 }
 
+.activeModal {
+	padding: 5rem 2rem 0;
+}
+
+.SVGbox svg {
+	filter: drop-shadow(2px 2px 5px rgba(0,0,0,.3));
+
+}
+
+#swatches {
+	width: auto;
+	justify-content: flex-start;
+	padding-right: 1rem;
+}
+
+.innerUserModal {
+	height: 100%;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.modalTitle  {
+	position: fixed;
+	z-index: 60;
+	top: 1rem;
+	left: 13rem;
+	font-size: 2rem;
+	padding-left: 1rem;
+	padding-bottom: 1rem;
+	padding-top: 0rem;
+	margin: 0;
+	border-left: 1px solid white;
+	border-bottom: 0px;
+	border-top: 0px;
+}
+
+.activeModal h2.artistTitle {
+	position: fixed;
+	z-index: 60;
+	top: 1rem;
+	left: 12rem;
+	font-size: 1.5rem;
+	padding-left: .5rem;
+	margin: 0;
+	border-left: 1px solid black;	
+	border-top: 0px;
+}
+
+
+.signIn {
+	display: flex;
+	flex-flow: column;
+	width: 20rem;
+}
 
 
 }
@@ -304,9 +562,22 @@ p {
 
 @media screen and (min-width: 64rem) {
 
+#title:hover {
+	filter: drop-shadow(0 0 10px white);
+}
 
 #wrapper {
 	padding-left: 20rem;
+}
+
+.nav {
+	height: 5rem;
+}
+.icon {
+	width: 4rem;
+	margin: 0 1rem 0 0;
+	transition: .2s;
+	cursor: pointer;
 }
 
 .about {
@@ -316,7 +587,49 @@ p {
 .avatar {
 	position: fixed;
 	left: 0;
+	transform: translateX(0rem);
 }
+
+.modalTitle {
+	position: fixed;
+	z-index: 60;
+	top: 2rem;
+	left: 25rem;
+	font-size: 3rem;
+	padding-left: 2rem;
+	border-left: 1px solid white;
+}
+
+.activeModal h2.artistTitle {
+	top: 1rem;
+	left: 23rem;
+	font-size: 3rem;
+	padding: 1rem 1rem 1rem 1.5rem;
+	margin: 0;
+	border-left: 1px solid black;	
+}
+
+
+.activeModal {
+	padding: 7rem 2rem 0;
+}
+
+.activeModal.SVGbox {
+	padding: 6rem 1rem 4rem;
+}
+
+.activeModal.SVGbox h2 {
+	/*top: 4rem;*/
+}
+
+.activeModal.SVGbox p {
+	top: 8rem;
+}
+
+.swatch, .erasor {
+	height: 2rem;
+	width: 4.5rem;
+
 
 }
 

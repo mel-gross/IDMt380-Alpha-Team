@@ -1,40 +1,35 @@
-
-
-<?php
+<?
 
 /* vars to hold json data from json file */
-$userFile = file_get_contents('./php/json/user.json');
+$userFile = file_get_contents('./json/user.json');
 $userData = json_decode($userFile, true);
 
 /* var to hold temp value for testing loading and saving */
-$currentUser = '';
+$currentUser = "ws392";
 
 
 /* function for testing basic sign up */
 function signUp(){
+// echo "--------------- Testing Sign Up -----------------\n";
 
     global $userData;
 
-    //new user and new password grabbed from form
-
-    $newUsername =  $_POST['new-username'];
-    $newPassword = $_POST['password'];
-    $avatar = $_POST['avatar'];
-    echo $newUsername;
-    echo $newPassword;
-    echo $avatar;
+    // temporary new user info to be tested
+    // you can change to test more
+    $newUsername =  "dfe73";
+    $newPassword = "pass1234";
 
     foreach($userData as $user){   
         if($newUsername == $user['username']){
             echo "Already existing user. Please try another username.\n";
-        }elseif($user['user_id'] == sizeof($userData)-1){
+        }else if($user['user_id'] == sizeof($userData)-1){
             // create array of new user information
             // these will be data you get from form
             $newUser = array(
                 'user_id' => sizeof($userData), // since index of array is 0 based, current size of array will be the index for new entry
                 'username' => $newUsername,
                 'password' => $newPassword,
-                'avatar' => $avatar, // it will be path to avatar img
+                'avatar' => 'snake', // it will be path to avatar img
                 'saved_work' => array() // empty for first time user = no saved work
             );
 
@@ -43,71 +38,35 @@ function signUp(){
         
         // update json file with updated array of user info
         $newUserData = json_encode($userData, JSON_PRETTY_PRINT);
-        file_put_contents('./php/json/user.json', $newUserData);
+        file_put_contents('./json/user.json', $newUserData);
 
         echo "You have successfully signed up.\n";
         }
     }
     echo "\n\n";
-}; //end sign up function 
-
-// Function for user login
-
-function login() {
-
-    global $userData;
-
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    foreach($userData as $user){
-
-    /* checking to see if username exists and if password matches */
-
-    if ($username == $user['username'] && $password == $user['password'])
-    {   
-        // loads saved work for the current user
-        $currentUser = $username;
-
-        echo "you have successfully signed in.\n";
-
-        loadSavedWork($currentUser);
-
-        } else {
-
-            //login failed, this should trigger state change in UI
-
-            $currentUser = NULL;
-        }
-    }
-
-};
-
-
+}
 
 /* function for testing loading user saved work */
-function loadSavedWork($currentUser){
+function loadSavedWork(){
+    // echo "--------------- Testing Loading Saved Work -----------------\n";
+
     global $userData;
 
     // get index for current user object
+    $currentUser = "ws392";
     $currentUserIndex = findIndex($currentUser);
     $user = $userData[$currentUserIndex];
-    echo $currentUserIndex . "\n";
-    echo 'saved work will display here';
 
     foreach($user['saved_work'] as $work){
         echo "saved_id: " . $work['saved_id'] . "\n";
         echo "saved_source: " . $work['saved_source'] . "\n\n"; 
-       
     }
     echo "\n";
-};
-
-
+}
 
 /* function for testing saving */
 function saveWork(){
-    echo "--------------- Testing Saving -----------------\n";
+    // echo "--------------- Testing Saving -----------------\n";
 
     global $userData;
 
@@ -118,7 +77,7 @@ function saveWork(){
     $newSource = "Change this to see if saved";
 
     // get index for current user object
-    $currentUser = '';
+    $currentUser = "ppl980";
     $currentUserIndex = findIndex($currentUser);
 
     // get saved work array from current user object
@@ -144,7 +103,7 @@ function saveWork(){
     //print_r($newUserData);
     file_put_contents('./json/user.json', $newUserData);
 
-    echo "You have successfully saved your work.";
+    // echo "You have successfully saved your work.";
 
     echo "\n\n";
 }
@@ -160,22 +119,12 @@ function findIndex($currentUser) {
         }
         $index++;
     }
-};
+}
 
 /* run functions */
-
-if (isset($_POST['new-username']))
-{
-    signUp();
-
-} 
-
-elseif (isset($_POST['username'])) {
-   login();
-};
-
-//loadSavedWork();
-//saveWork();
+signUp();
+loadSavedWork();
+saveWork();
 
 
 ?>
