@@ -1,9 +1,9 @@
 <section class="toolkits hide" id="toolkits">
 
-	<div id="toolBar">
-		<?php echo "<span id='bucketTool' ";  include '../icon/paint-bucket.svg'; echo "</span>"; ?>
-		<?php echo "<span id='eraserTool' "; include '../icon/eraser.svg'; echo "</span>"; ?>
-		<?php echo "<span id='markerTool' "; include '../icon/highlighter.svg'; echo "</span>"; ?>
+	<div id="toolBar" class="toolBar">
+		<div id='bucketTool'>Bucket</div>
+		<div id='eraserTool'>Erasor</div>;
+		<div id='markerTool'>Marker</div>;
 	</div>
 
 	<div id="swatches">
