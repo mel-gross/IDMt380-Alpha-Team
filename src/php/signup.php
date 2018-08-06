@@ -10,7 +10,7 @@ $currentUser = "ws392";
 
 /* function for testing basic sign up */
 function signUp(){
-echo "--------------- Testing Sign Up -----------------\n";
+// echo "--------------- Testing Sign Up -----------------\n";
 
     global $userData;
 
@@ -48,7 +48,7 @@ echo "--------------- Testing Sign Up -----------------\n";
 
 /* function for testing loading user saved work */
 function loadSavedWork(){
-    echo "--------------- Testing Loading Saved Work -----------------\n";
+    // echo "--------------- Testing Loading Saved Work -----------------\n";
 
     global $userData;
 
@@ -66,7 +66,7 @@ function loadSavedWork(){
 
 /* function for testing saving */
 function saveWork(){
-    echo "--------------- Testing Saving -----------------\n";
+    // echo "--------------- Testing Saving -----------------\n";
 
     global $userData;
 
@@ -103,7 +103,7 @@ function saveWork(){
     //print_r($newUserData);
     file_put_contents('./json/user.json', $newUserData);
 
-    echo "You have successfully saved your work.";
+    // echo "You have successfully saved your work.";
 
     echo "\n\n";
 }

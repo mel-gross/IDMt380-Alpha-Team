@@ -325,7 +325,8 @@ $(window).scroll(function() {
 
 
 
+$('.accordion').click(()=> {
 
-
-// Gradient Fill
-
+	$('.accordion').attr('id','not');
+	$(this).attr('id','expanded')
+});
