@@ -81,9 +81,23 @@ var eraser = false;
 var marker = false;
 
 
-// $(document).on('keypress', function(event) {
-// 	console.log(event.keyCode);
+$(document).on('keypress', function(event) {
+	hey(event.keyCode);
+	// Activate Bucket
+	if (event.keyCode == 32) {
+		if (!eyeDrop) {
+			$('activeModal.SVGbox svg').addClass('eyeDrop');
+			$('#toolkit div').removeClass('activeTool');
+			$('#eyeDropTool').addClass('activeTool');
+			eyeDrop = false;
+		}
+		eyeDrop = true;
+	}
+});
 
+$('.eyeDrop path, .eyeDrop * path').click(()=> {
+	hey();
+});
 // 	// Activate Bucket
 // 	if (event.keyCode == 98) {
 // 		if (!bucket) {
@@ -325,8 +339,19 @@ $(window).scroll(function() {
 
 
 
-$('.accordion').click(()=> {
+// $('.helpModal').click('.accordion', ()=> {
+// 	// $('.accordion p').addClass('hide');
+	
+// 	// hey(this.classList);
+// });
 
-	$('.accordion').attr('id','not');
-	$(this).attr('id','expanded')
-});
+
+// HEY!
+
+function hey(log) {
+	if (log) {		
+	console.log(log);
+	} else {
+	console.log('hey');
+	}
+}

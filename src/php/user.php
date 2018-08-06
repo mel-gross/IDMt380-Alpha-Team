@@ -7,7 +7,7 @@
 	<form id="signIn" class="signIn" action="">
 	<h2>Log In</h2>
 		<input type="text" id="username" maxlength="30" placeholder="Email">
-		<input type="password" new-password id="password" minlength="8" maxlength="15" placeholder="Password">
+		<input type="password" new-password id="password" minlength="8" maxlength="15" placeholder="Password (at least 8 characters)">
 		<button class="infoBtn hide" id="oldSubmit">Sign In</button>
 		<input type="password" new-password id="passwordConfirm" minlength="8" maxlength="15" placeholder="Confirm Password" onclick="matchPW()">
 		<button class="infoBtn" id="newSubmit" onclick="preventdefault()">Sign Up</button>

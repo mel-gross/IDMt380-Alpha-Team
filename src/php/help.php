@@ -2,7 +2,7 @@
 <section class="helpModal modal" id="helpModal">
 	<h1 class="modalTitle" id="helpTitle">Information</h1>
 
-	<div class="accordion" id="expanded">
+	<div class="accordion">
 		<h2>Painting</h2>
 		<p>To start painting a picture, <i>tap on it</i>, then <i>tap</i> inside the lines. You can change colors by <i>tapping</i> or <i>double-tapping</i> on a color swatch at the bottom of the screen.</p>
 	</div>
@@ -13,8 +13,9 @@
 		<p>If you are signed in you can <i>tap the save button</i> next to your current drawing to add it to your gallery.</p>
 	</div>
 
-	<div class="accordion">
+<!-- 	<div class="accordion">
 		<h2>About</h2>
-		<p>Aurora is a painting app for all ages. It was designed as a team project to practice web development workflow techniques. Aurora continues as a fun web app that lets you color, save, and export drawings made by Drexel's own artistic masters from the Digital Media Department.</p>
+		<p>Aurora is a painting app for all ages. It was designed as a team project to practice web development workflow techniques. Aurora continues as a fun web app that lets you color, save, and export drawings made by Drexel's own artistic geniuses from the Digital Media Department.</p>
 	</div>
+ -->
 </section>
