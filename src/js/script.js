@@ -246,7 +246,7 @@ function showRainbow(that) {
 }
 
 
-$('.SVGbox').click(()=>{$('#toolkits').removeClass('showRainbow');});
+$('.SVGbox').click(function(){$('#toolkits').removeClass('showRainbow');});
 
 function timer() {
     idleTime++;
@@ -284,7 +284,7 @@ $("#gallery").on("click", ".SVGbox", function() {
 	$('.icon svg path').css('fill','#2f2f2f');
 
 	if (!swatchOpened) {
-		setTimeout(() => {randomizeSwatches();}, 500);		
+		setTimeout(function(){randomizeSwatches();}, 500);		
 		swatchOpened = true;
 	}
 });
