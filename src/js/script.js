@@ -95,7 +95,7 @@ $(document).on('keypress', function(event) {
 	}
 });
 
-$('.eyeDrop path, .eyeDrop * path').click(()=> {
+$('.eyeDrop path, .eyeDrop * path').click(function(){
 	hey();
 });
 // 	// Activate Bucket
@@ -135,7 +135,7 @@ var x, y, w, h;
 document.addEventListener('mousemove', onMouseUpdate, false);
 
 var down = false;
-$('#colorPicker, .SVGbox').mousedown(()=> {
+$('#colorPicker, .SVGbox').mousedown(function(){
 	down = true;
 	idleTime = 0;
 });
@@ -147,7 +147,7 @@ $('#colorPicker').click(function(){
 	clickMove(x, y);
 });
 
-$('#colorPicker, .SVGbox').mouseup(()=> {down = false;});
+$('#colorPicker, .SVGbox').mouseup(function() {down = false;});
 
 function onMouseUpdate(e) {
 	x = e.clientX - $('#colorPicker').offset().left;
@@ -271,9 +271,9 @@ function movePicker(left, top) {
 // UI INTERACTIONS
 
 
-$('#title').click(() => {closeModals()});
-$('#userBtn').click(() => {openModal('#userModal')});
-$('#helpBtn').click(() => {openModal('#helpModal')});
+$('#title').click(function (){closeModals()});
+$('#userBtn').click(function (){openModal('#userModal')});
+$('#helpBtn').click(function (){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
 	openModal(this);
