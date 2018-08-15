@@ -12,8 +12,10 @@
 - An overall objective
 - Some sort of secret meta plot
 - Ability to name his work
+- Mobile background
 #### Bugs
 - Help redirects the user to the main menu
+- Media queries
 #### Other
 - Wasn’t clear where the help button was at first
 - Wasn’t clear on what the user account was for
