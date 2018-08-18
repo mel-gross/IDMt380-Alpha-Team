@@ -2,7 +2,7 @@
 	
 <main class="content" id="content">
 	<section class="about" id="about">
-		<h3>Welcome to Aurora! <br><br><blockquote>Let’s paint!</blockquote> </h3>
+		<h3 class="welcome_header"><blockquote class="welcome_blockquote">Welcome to Aurora!</blockquote><br><blockquote class="welcome_blockquote">Let’s paint!</blockquote> </h3>
 		<img class="avatar" id="avatar" src="img/auroraAvatarM.png" alt="">
 	</section>
 	
