@@ -321,6 +321,7 @@ $("#gallery").on("click", ".SVGbox", function() {
 
 	if (!swatchOpened) {
 		setTimeout(function(){setSwatches();}, 500);		
+
 		swatchOpened = true;
 	}
 });
