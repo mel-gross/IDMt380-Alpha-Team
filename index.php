@@ -2,12 +2,8 @@
 	
 <main class="content" id="content">
 	<section class="about" id="about">
-<<<<<<< HEAD
-		<!-- <h3>Welcome to Aurora! <br><br><blockquote>Let’s paint!</blockquote> </h3> -->
-=======
 		<h3 class="welcome_header"><blockquote class="welcome_blockquote">Welcome to Aurora!</blockquote><br><blockquote class="welcome_blockquote">Let’s paint!</blockquote> </h3>
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
-		<img class="avatar" id="avatar" src="img/auroraAvatarM.png" alt="">
+		<img class="avatar" id="avatar" src="icon/auroraAvatarM.png" alt="">
 	</section>
 	
 	<?php include 'php/gallery.php';

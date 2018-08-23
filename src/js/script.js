@@ -15,20 +15,26 @@ var activeLit = 60;
 
 
 function defaultCanvas() {
-	$("[data-name='outline'], [data-name='outlines']").css('pointer-events','none');
+	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	
 }
 
 
-$('#gallery svg *, #gallery svg g *').mousedown(function(){
-  $(this).css("fill", activeColor);
-});
+// $('#gallery svg *, #gallery svg g *').mousedown(function(){
+//   $(this).css("fill", activeColor);
+// });
 
-$('#gallery svg *, #gallery svg g *').hover(function(){
-	if (down) {
-	  	$(this).css("fill", activeColor);		
-	}
+
+$('g g').on('click', function() {
+  var chosenGroup = '#' + this.id + ' *';
+  $(chosenGroup).css('fill', activeColor);
+
 });
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
 
 
 // $('#gallery svg *, #gallery svg g *').click(function(){
@@ -42,7 +48,8 @@ var check = setInterval(scaleVal,10);
 
 function scaleVal() {
 	scaleTo = changeScale.value;
-	$('.activeModal svg').css('transform','scale(' + scaleTo/10 + ')');
+	// $('.activeModal svg').css('transform','scale(' + (scaleTo/20) + ')');
+	$('.activeModal svg').css('height', scaleTo*3 + '%');
 
 }
 
@@ -98,36 +105,6 @@ $(document).on('keypress', function(event) {
 $('.eyeDrop path, .eyeDrop * path').click(function(){
 	hey();
 });
-// 	// Activate Bucket
-// 	if (event.keyCode == 98) {
-// 		if (!bucket) {
-// 			$('svg').addClass('bucket');
-// 			$('#toolkit div').removeClass('activeTool');
-// 			$('#bucketTool').addClass('activeTool');
-// 		}
-// 		bucket = true;
-// 	}
-
-// 	// Activate Eye Drop
-// 	if (event.keyCode == 105) {
-// 		if (!eyeDrop) {$('svg').addClass('eyeDrop');}
-// 		eyeDrop = true;
-// 	}
-
-// 	// Activate Erasor
-// 	if (event.keyCode == 101) {
-// 		if (!eraser) {$('svg').addClass('eraser');}
-// 		eraser = true;
-// 	}
-
-// 	// Activate Marker
-// 	if (event.keyCode == 109) {
-// 		if (!marker) {$('svg').addClass('marker');}
-// 		marker = true;
-// 	}
-
-
-// });
 
 
 var x, y, w, h;
@@ -148,6 +125,10 @@ $('#colorPicker').click(function(){
 });
 
 $('#colorPicker, .SVGbox').mouseup(function() {down = false;});
+<<<<<<< HEAD
+// $('#colorPicker, .SVGbox').mouseout(function() {down = false;});
+=======
+>>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 
 function onMouseUpdate(e) {
 	x = e.clientX - $('#colorPicker').offset().left;
@@ -205,7 +186,10 @@ theScheme = schemes[Math.floor(Math.random()*schemes.length)];
 
 
 $('#palettes').on('click',function() {
+<<<<<<< HEAD
+=======
 	console.log('hey');
+>>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	$(this).toggleClass('open');
 });
 
@@ -282,7 +266,11 @@ function showRainbow() {
 }
 
 
-$('.SVGbox').click(function(){$('#toolkits').removeClass('showRainbow');});
+$('.SVGbox').click(function(){
+	$('#toolkits').removeClass('showRainbow');
+	$('#palettes').removeClass('open');
+
+});
 
 function timer() {
     idleTime++;
@@ -321,7 +309,10 @@ $("#gallery").on("click", ".SVGbox", function() {
 
 	if (!swatchOpened) {
 		setTimeout(function(){setSwatches();}, 500);		
+<<<<<<< HEAD
+=======
 
+>>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		swatchOpened = true;
 	}
 });
@@ -334,6 +325,7 @@ function openModal(modal) {
 		closeModals();
 	}else {
 		title.src = "img/auroraLogoL.png";
+		$('.SVGbox svg').css('height','15rem');
 		$('*').removeClass('activeModal');
 		if ($(modal).is('#userModal')) {			
 			$('#userBtn svg path').css('fill','#ffba40');
@@ -348,7 +340,7 @@ function openModal(modal) {
 }
 
 function closeModals() {
-	$('.activeModal svg').css('transform','scale(1)');
+	$('.activeModal svg').css('height','15rem');
 	changeScale.value = 10;
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
@@ -361,26 +353,6 @@ function closeModals() {
 };
 
 
-
-
-$(window).scroll(function() {
-	if ($('#wrapper').scrollTop() > 300) {
-		$('#avatar').addClass('hide');
-		$('#helpBtn').removeClass('hide');
-	} else {
-		$('#avatar').removeClass('hide');
-		$('#helpBtn').addClass('hide');
-
-	}
-});
-
-
-
-// $('.helpModal').click('.accordion', ()=> {
-// 	// $('.accordion p').addClass('hide');
-	
-// 	// hey(this.classList);
-// });
 
 
 // HEY!
