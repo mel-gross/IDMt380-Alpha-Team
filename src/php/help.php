@@ -4,13 +4,13 @@
 
 	<div class="accordion">
 		<h2>Painting</h2>
-		<p>To start painting a picture, <i>tap on it</i>, then <i>tap</i> inside the lines. You can change colors by <i>tapping</i> or <i>double-tapping</i> on a color swatch at the bottom of the screen.</p>
+		<p class="helpP">To start painting a picture, <i>tap on it</i>, then <i>tap</i> inside the lines. You can change colors by <i>tapping</i> or <i>double-tapping</i> on a color swatch at the bottom of the screen.</p>
 	</div>
 
 	<div class="accordion">
 		<h2>Saving</h2>
-		<p>Anyone can use Aurora without making an account. But you can save your drawings by going to the <i>user icon</i> in the top right, and signing up with an email address.  </p>
-		<p>If you are signed in you can <i>tap the save button</i> next to your current drawing to add it to your gallery.</p>
+		<p class="helpP">Anyone can use Aurora without making an account. But you can save your drawings by going to the <i>user icon</i> in the top right, and signing up with an email address.  </p>
+		<p class="helpP">If you are signed in you can <i>tap the save button</i> next to your current drawing to add it to your gallery.</p>
 	</div>
 
 <!-- 	<div class="accordion">

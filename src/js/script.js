@@ -3,7 +3,7 @@
 function load() {
 	defaultCanvas();
 	$('svg').addClass('svg');
-	// randomizeSwatches();
+	setSwatches(theScheme);
 }
 
 
@@ -15,20 +15,26 @@ var activeLit = 60;
 
 
 function defaultCanvas() {
-	$("[data-name='outline'], [data-name='outlines']").css('pointer-events','none');
+	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	
 }
 
 
-$('#gallery svg *, #gallery svg g *').mousedown(function(){
-  $(this).css("fill", activeColor);
-});
+// $('#gallery svg *, #gallery svg g *').mousedown(function(){
+//   $(this).css("fill", activeColor);
+// });
 
-$('#gallery svg *, #gallery svg g *').hover(function(){
-	if (down) {
-	  	$(this).css("fill", activeColor);		
-	}
+
+$('g g').on('click', function() {
+  var chosenGroup = '#' + this.id + ' *';
+  $(chosenGroup).css('fill', activeColor);
+
 });
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
 
 
 // $('#gallery svg *, #gallery svg g *').click(function(){
@@ -42,7 +48,8 @@ var check = setInterval(scaleVal,10);
 
 function scaleVal() {
 	scaleTo = changeScale.value;
-	$('.activeModal svg').css('transform','scale(' + scaleTo/10 + ')');
+	// $('.activeModal svg').css('transform','scale(' + (scaleTo/20) + ')');
+	$('.activeModal svg').css('height', scaleTo*3 + '%');
 
 }
 
@@ -95,39 +102,9 @@ $(document).on('keypress', function(event) {
 	}
 });
 
-$('.eyeDrop path, .eyeDrop * path').click(()=> {
+$('.eyeDrop path, .eyeDrop * path').click(function(){
 	hey();
 });
-// 	// Activate Bucket
-// 	if (event.keyCode == 98) {
-// 		if (!bucket) {
-// 			$('svg').addClass('bucket');
-// 			$('#toolkit div').removeClass('activeTool');
-// 			$('#bucketTool').addClass('activeTool');
-// 		}
-// 		bucket = true;
-// 	}
-
-// 	// Activate Eye Drop
-// 	if (event.keyCode == 105) {
-// 		if (!eyeDrop) {$('svg').addClass('eyeDrop');}
-// 		eyeDrop = true;
-// 	}
-
-// 	// Activate Erasor
-// 	if (event.keyCode == 101) {
-// 		if (!eraser) {$('svg').addClass('eraser');}
-// 		eraser = true;
-// 	}
-
-// 	// Activate Marker
-// 	if (event.keyCode == 109) {
-// 		if (!marker) {$('svg').addClass('marker');}
-// 		marker = true;
-// 	}
-
-
-// });
 
 
 var x, y, w, h;
@@ -135,7 +112,7 @@ var x, y, w, h;
 document.addEventListener('mousemove', onMouseUpdate, false);
 
 var down = false;
-$('#colorPicker, .SVGbox').mousedown(()=> {
+$('#colorPicker, .SVGbox').mousedown(function(){
 	down = true;
 	idleTime = 0;
 });
@@ -147,7 +124,8 @@ $('#colorPicker').click(function(){
 	clickMove(x, y);
 });
 
-$('#colorPicker, .SVGbox').mouseup(()=> {down = false;});
+$('#colorPicker, .SVGbox').mouseup(function() {down = false;});
+// $('#colorPicker, .SVGbox').mouseout(function() {down = false;});
 
 function onMouseUpdate(e) {
 	x = e.clientX - $('#colorPicker').offset().left;
@@ -184,18 +162,53 @@ function changeColor(hue,sat,lit) {
 
 var swatchOpened = false;
 
-function randomizeSwatches() {
-		var scheme1 = ['#720066','#ffba40','#86fff7'];
-		var scheme2 = ['#FF0000','#00FF00','#0000FF'];
-		var scheme3 = ['#123456','#654321','#abcdef'];
-		var scheme4 = ['#ffffff','#ff0022','#333333'];
 
-		var schemes = [scheme1,scheme2,scheme3,scheme4];
 
-		var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
+var schemes = [];
+for (var i = 0; i < palettes.children.length; i++) {
+	let aScheme = [];
+	for (var j = 0; j < palettes.children[i].children.length; j++) {
+		aScheme.push(palettes.children[i].children[j].innerHTML);
+	}
+	schemes.push(aScheme);
+	var first = palettes.children[i].children[0].innerHTML;
+	var second = palettes.children[i].children[1].innerHTML;
+	var third = palettes.children[i].children[2].innerHTML;
+	var fourth = palettes.children[i].children[3].innerHTML;
+	palettes.children[i].style.background = "linear-gradient(90deg, " + first + " 0%, " + second + " 33%, " + third + " 67%, " + fourth + " 100%)";
+}
+
+theScheme = schemes[Math.floor(Math.random()*schemes.length)];
+
+
+
+$('#palettes').on('click',function() {
+	$(this).toggleClass('open');
+});
+
+
+$('.palette').on('click',function(){changePalette(this)});
+
+function changePalette(that) {
+	console.log(that);
+	var theScheme = [];
+	if(that !== undefined) {
+	console.log(that);
+		for (var i = 0; i < that.children.length; i++) {
+			theScheme.push(that.children[i].innerHTML);
+		}
+	}
+	setSwatches(theScheme);
+}
+
+
+
+function setSwatches(theScheme) {
+
+		// changePalette();
 		console.log(theScheme);
 
-		for (var i = 0; i < swatches.children.length; i++) {
+		for (var i = 0; i < $('.swatch').length; i++) {
 
 		// activeHue = Math.floor(Math.random() * 360);
 		// activeLit = Math.floor(25 + Math.random() * 51);
@@ -231,22 +244,26 @@ $('.swatch').click(function() {
 var idleInterval;
 var idleTime = 0;
 
-$('#toolkits').on('doubletap',function(event){
-	showRainbow('#toolkits');
+$('#swatches').on('doubletap',function(event){
+	showRainbow();
 });
 
-$('#toolkits').dblclick(function(){
-	showRainbow('#toolkits');
+$('#swatches').dblclick(function(){
+	showRainbow();
 });
 
-function showRainbow(that) {
-	$(that).addClass('showRainbow');
+function showRainbow() {
+	$('#toolkits').addClass('showRainbow');
 	clearInterval(idleInterval);
     idleInterval = setInterval(timer, 1000); 
 }
 
 
-$('.SVGbox').click(function(){$('#toolkits').removeClass('showRainbow');});
+$('.SVGbox').click(function(){
+	$('#toolkits').removeClass('showRainbow');
+	$('#palettes').removeClass('open');
+
+});
 
 function timer() {
     idleTime++;
@@ -271,9 +288,9 @@ function movePicker(left, top) {
 // UI INTERACTIONS
 
 
-$('#title').click(() => {closeModals()});
-$('#userBtn').click(() => {openModal('#userModal')});
-$('#helpBtn').click(() => {openModal('#helpModal')});
+$('#title').click(function (){closeModals()});
+$('#userBtn').click(function (){openModal('#userModal')});
+$('#helpBtn').click(function (){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
 	openModal(this);
@@ -284,7 +301,7 @@ $("#gallery").on("click", ".SVGbox", function() {
 	$('.icon svg path').css('fill','#2f2f2f');
 
 	if (!swatchOpened) {
-		setTimeout(function(){randomizeSwatches();}, 500);		
+		setTimeout(function(){setSwatches();}, 500);		
 		swatchOpened = true;
 	}
 });
@@ -297,6 +314,7 @@ function openModal(modal) {
 		closeModals();
 	}else {
 		title.src = "img/auroraLogoL.png";
+		$('.SVGbox svg').css('height','15rem');
 		$('*').removeClass('activeModal');
 		if ($(modal).is('#userModal')) {			
 			$('#userBtn svg path').css('fill','#ffba40');
@@ -311,7 +329,7 @@ function openModal(modal) {
 }
 
 function closeModals() {
-	$('.activeModal svg').css('transform','scale(1)');
+	$('.activeModal svg').css('height','15rem');
 	changeScale.value = 10;
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
@@ -324,26 +342,6 @@ function closeModals() {
 };
 
 
-
-
-$(window).scroll(function() {
-	if ($('#wrapper').scrollTop() > 300) {
-		$('#avatar').addClass('hide');
-		$('#helpBtn').removeClass('hide');
-	} else {
-		$('#avatar').removeClass('hide');
-		$('#helpBtn').addClass('hide');
-
-	}
-});
-
-
-
-// $('.helpModal').click('.accordion', ()=> {
-// 	// $('.accordion p').addClass('hide');
-	
-// 	// hey(this.classList);
-// });
 
 
 // HEY!
