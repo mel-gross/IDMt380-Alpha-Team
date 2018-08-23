@@ -125,7 +125,10 @@ $('#colorPicker').click(function(){
 });
 
 $('#colorPicker, .SVGbox').mouseup(function() {down = false;});
+<<<<<<< HEAD
 // $('#colorPicker, .SVGbox').mouseout(function() {down = false;});
+=======
+>>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 
 function onMouseUpdate(e) {
 	x = e.clientX - $('#colorPicker').offset().left;
@@ -183,6 +186,10 @@ theScheme = schemes[Math.floor(Math.random()*schemes.length)];
 
 
 $('#palettes').on('click',function() {
+<<<<<<< HEAD
+=======
+	console.log('hey');
+>>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	$(this).toggleClass('open');
 });
 
@@ -302,6 +309,10 @@ $("#gallery").on("click", ".SVGbox", function() {
 
 	if (!swatchOpened) {
 		setTimeout(function(){setSwatches();}, 500);		
+<<<<<<< HEAD
+=======
+
+>>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		swatchOpened = true;
 	}
 });
