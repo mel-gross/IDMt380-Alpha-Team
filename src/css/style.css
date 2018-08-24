@@ -51,7 +51,7 @@ button {
 	height: 100vh;
 	overflow-y: auto;
 	overflow-x: hidden;
-	/*padding-right: 1em;*/
+	/*padding-right: 1rem;*/
 }
 
 /* HEADER */
@@ -63,7 +63,7 @@ button {
 	top: 0;
 	left: 0;
 	z-index: 10;
-	padding: 1em 1em 0;
+	padding: 1rem 1rem 0;
 	width: 100%;
 	height: 3em;
 	background: linear-gradient(rgba(0, 0, 10, .7) 0%, transparent);
@@ -83,11 +83,7 @@ button {
 
 .icon {
 	width: 2em;
-<<<<<<< HEAD
 	margin: 0 .5rem 0 0;
-=======
-	margin: 0 .5em 0 0;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	transition: .2s;
 	pointer-events: all;
 	cursor: pointer;
@@ -100,13 +96,14 @@ button {
 .icon svg path {
 	fill: #f5f5f5;
 }
-<<<<<<< HEAD
-g g:hover * {
-	fill: #ccc;
-	transition: .5s;
+
+g g * {
+	transition: .2s;
+
 }
-=======
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
+g g:hover * {
+	fill: #ddd;
+}
 
 /* HOME PAGE */
 
@@ -119,23 +116,14 @@ g g:hover * {
 
 .about h3 {
 	/*	margin-top: 20em;
-<<<<<<< HEAD
 	margin-bottom: -25rem;
-=======
-	margin-bottom: -25em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 */
 	padding-bottom: 3em;
 }
 
 .avatar {
-<<<<<<< HEAD
 	max-width: 15rem;
 	min-height: 15rem;
-=======
-	max-width: 15em;
-	min-height: 15em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	margin: -4em 0 0 3em;
 	cursor: pointer;
 	transition: 1s ease;
@@ -150,29 +138,17 @@ g g:hover * {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
-	padding: 0 1em;
+	padding: 0 1rem;
 }
 
 .SVGbox {
 	/*width: 100%;*/
 	/*flex-grow: 1 0 20%;*/
-<<<<<<< HEAD
 	max-width: 13rem;
 	/*min-width: 15rem;*/
 	/*height: 17em;*/
 	margin: 0 0rem 6em;
 	/*padding: 1rem 0;*/
-=======
-	max-width: 30%;
-	min-width: 15em;
-	height: 17em;
-	background: url(../img/canvasTextureL.jpg);
-	/*background-blend-mode: hard-light;*/
-	background-size: cover;
-	background-position: center;
-	margin: 0 1em 6em;
-	padding: 1em 0;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	transition: .3s;
 	flex-grow: 1;
 }
@@ -182,7 +158,6 @@ g g:hover * {
 }
 
 .gallery .SVGbox h2 {
-<<<<<<< HEAD
 	/*margin: 1rem 0 0 0rem;*/
 	text-align: left;
 }
@@ -190,14 +165,6 @@ g g:hover * {
 .gallery .SVGbox svg {
 	/*width: 15rem;*/
 	height: 15rem;
-=======
-	margin: 1em 0 0 1em;
-}
-
-.gallery .SVGbox svg {
-	width: 15em;
-	height: 15em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	pointer-events: none;
 }
 
@@ -207,7 +174,6 @@ g g:hover * {
 
 /* TOOL KITS */
 
-<<<<<<< HEAD
 .toolkits {
 	width: 100%;
 	pointer-events: none !important;
@@ -218,10 +184,6 @@ g g:hover * {
 .toolkits * {
 	pointer-events: all;
 	width: auto;
-=======
-.toolkits,
-.toolkits * {
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	transition: .2s;
 	z-index: 6;
 }
@@ -229,40 +191,23 @@ g g:hover * {
 .toolkits .colorPicker,
 .toolkits #swatches,
 .toolkits .toolBar  {
-<<<<<<< HEAD
-=======
-
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	transform: translateY(6em);
 }
 
 .toolBar {
 	display: flex;
-<<<<<<< HEAD
 	flex-flow: column nowrap;
 	justify-content: flex-end;
-=======
-	justify-content: space-between;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	position: fixed;
 	bottom: 10em;
 	left: 0;
 	padding: 0 1rem;
-<<<<<<< HEAD
 	height: 100%;
 	/*width: 4rem;*/
 	min-width: 4rem;
 	color: #444;
 	/*font-size: 2rem;*/
 	/*z-index: 30;*/
-=======
-	height: 2rem;
-	width: 100%;
-	max-width: 100vw;
-	color: #444;
-	/*font-size: 2rem;*/
-	z-index: 60;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 .colorPicker {
@@ -293,7 +238,7 @@ g g:hover * {
 	position: fixed;
 	bottom: 6em;
 	left: 0;
-	padding: .5em 1em;
+	padding: .5rem 1rem;
 	border: 1px solid #444;
 	width: 100%;
 	cursor: pointer;
@@ -301,18 +246,10 @@ g g:hover * {
 
 .swatch,
 .erasor {
-<<<<<<< HEAD
 	height: 1.5rem;
 	flex: 1 0 20%;
 	width: 3rem;
 	margin-right: 1rem;
-=======
-	height: 1.5em;
-	flex: 1 0 20%;
-
-	width: 3em;
-	margin-right: 1em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	border: 1px solid #444;
 	border-radius: 2px;
 	transition: .2s;
@@ -323,11 +260,7 @@ g g:hover * {
 .erasor {
 	margin-left: 2em;
 	background: url(../icon/crossout.svg);
-<<<<<<< HEAD
 	background-size: 3em 1.5rem;
-=======
-	background-size: 3em 1.5em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 #activeSwatch {
@@ -335,23 +268,15 @@ g g:hover * {
 	background: transparent;
 }
 
-<<<<<<< HEAD
 #palettes {
 	display: flex;
 	flex-flow: row wrap;
-=======
-
-#palettes {
-	display: flex;
-	flex-flow: row nowrap;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	width: 2rem;
 	height: 2rem;
 	overflow: hidden;
 	background: url(../icon/palette.png);
 	background-size: cover;
 	cursor: pointer;
-<<<<<<< HEAD
 }
 
 #palettes * {
@@ -379,38 +304,8 @@ g g:hover * {
 	margin-bottom: .5rem;
 	border: 1px solid black;
 	border-radius: 2px;
-=======
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
-#palettes * {
-	opacity: 0;
-	pointer-events: none;
-}
-
-#palettes.open {
-	overflow-x: auto;
-	width: 100%;
-}
-#palettes.open .palette {
-	opacity: 1;
-	pointer-events: all;
-}
-
-.palette {
-	flex: 1 0 10%;
-	height: 2rem;
-	width: 2rem;
-	background: black;
-	margin-right: .5rem;
-	margin-bottom: .5rem;
-}
-
-
-
-.palette p {
-	display: none;
-}
 
 
 .palette p {
@@ -434,19 +329,11 @@ g g:hover * {
 }
 
 .modalTitle {
-<<<<<<< HEAD
 	padding-bottom: 2rem;
 	border-top: 1px solid #f5f5f5;
 	font-size: 2rem;
 	text-align: right;
 	padding-right: 0.125rem;
-=======
-	padding-bottom: 2em;
-	border-top: 1px solid #f5f5f5;
-	font-size: 2em;
-	text-align: right;
-	padding-right: 0.125em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 .SVGbox:not(.activeModal) .modalTitle {
@@ -473,11 +360,7 @@ g g:hover * {
 }
 
 #login_header {
-<<<<<<< HEAD
 	margin: 0.125rem auto;
-=======
-	margin: 0.125em auto;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 .signIn {
@@ -487,45 +370,33 @@ g g:hover * {
 }
 
 .signIn input {
-<<<<<<< HEAD
 	padding: .33rem;
 	border: none;
 	background: #f5f5f5;
 	margin: 0.5rem auto;
 	width: 25rem;
-=======
-	padding: .33em;
-	border: none;
-	background: #f5f5f5;
-	margin: 0.5em auto;
-	width: 25em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 .info {
 	display: flex;
 	flex-flow: column;
 	align-items: center;
-	width: 20em;
+	width: 20rem;
 }
 
 .info h2 {
-	/*margin: 0 0 1em 1em;*/
+	/*margin: 0 0 1rem 1rem;*/
 }
 
 .info img {
-	width: 10em;
-	height: 10em;
+	width: 10rem;
+	height: 10rem;
 	border-radius: 100%;
 	border: 1px solid #f5f5f5;
-<<<<<<< HEAD
 	margin-bottom: 1rem;
-=======
-	margin-bottom: 1em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	background: rgba(0, 0, 0, .3);
 	text-align: center;
-	padding-top: 4.5em;
+	padding-top: 4.5rem;
 	cursor: pointer;
 }
 
@@ -535,23 +406,14 @@ g g:hover * {
 }
 
 .infoBtn {
-<<<<<<< HEAD
 	padding: .5rem;
 	margin: 0.5rem auto;
-=======
-	padding: .5em;
-	margin: 0.5em auto;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	background: transparent;
 	border: 1px solid #f5f5f5;
 	color: #f5f5f5;
 	border-radius: 2px;
 	transition: .1s;
-<<<<<<< HEAD
 	width: 25rem;
-=======
-	width: 25em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 .infoBtn:hover {
@@ -573,7 +435,6 @@ g g:hover * {
 /* HELP SCREEN */
 
 #helpTitle {
-<<<<<<< HEAD
 	padding-top: 0.125rem;
 }
 
@@ -584,15 +445,6 @@ g g:hover * {
 	border-radius: 2px;
 	padding: .5rem;
 	margin-bottom: 1rem;
-=======
-	padding-top: 0.125em;
-}
-
-.help_paragraph {
-	margin: auto;
-	background-color:rgba(68,68,68,0.45);
-	padding: .5em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 }
 
 .helpModal {
@@ -609,16 +461,12 @@ g g:hover * {
 }
 
 .accordion h2 {
-	padding: .5em 0 1em;
+	padding: .5rem 0 1rem;
 	/*border-top: 1px solid #f5f5f5;*/
 }
 
 .accordion {
-<<<<<<< HEAD
 	/* margin-left: 1rem; */
-=======
-	/* margin-left: 1em; */
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	/*height: 0;*/
 	transition: .2s;
 	overflow-y: hidden;
@@ -638,11 +486,7 @@ g g:hover * {
 	left: 0;
 	z-index: 7;
 	margin: 0 !important;
-<<<<<<< HEAD
 	padding: 4em 1rem 0;
-=======
-	padding: 4em 1em 0;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	width: 100% !important;
 	max-width: 100% !important;
 	/*height: 100% !important;*/
@@ -661,14 +505,10 @@ g g:hover * {
 }
 
 .activeModal.SVGbox {
-<<<<<<< HEAD
 	background: url(../img/canvasTextureL.jpg);
 	background-size: cover;
 	background-position: center;
 	padding: 7em 1rem 4em;
-=======
-	padding: 7em 1em 4em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	color: #444;
 	z-index: 5;
 	overflow: auto !important;
@@ -676,22 +516,23 @@ g g:hover * {
 
 .activeModal.SVGbox h2 {
 	position: fixed;
-	top: 3em;
+	top: 3rem;
 	left: 0;
-	padding-left: 2em;
+	padding-left: 2rem;
 	border-top: 1px solid #444;
 	text-shadow: 0 0 10px #f5f5f5;
 }
 
 .activeModal.SVGbox p {
 	position: fixed;
-	top: 6em;
-	margin-left: 4em;
+	top: 6rem;
+	margin-left: 4rem;
 	text-shadow: 0 0 10px #f5f5f5;
 }
 
 .activeModal.SVGbox svg {
 	width: 100%;
+	max-width: 200vw;
 	height: 100%;
 	margin: 0;
 	pointer-events: all;
@@ -728,11 +569,7 @@ g g:hover * {
 		justify-content: flex-end;
 	}
 	.about h3 {
-<<<<<<< HEAD
 		margin: 5rem 0 0 4em;
-=======
-		margin: 5em 0 0 4em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		font-size: 200%;
 		max-width: 40em;
 	}
@@ -742,33 +579,18 @@ g g:hover * {
 		margin: 0em;
 	}
 	.activeModal {
-<<<<<<< HEAD
 		padding: 5rem 2em 0;
-=======
-		padding: 5em 2em 0;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	}
 	.SVGbox svg {
 		filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, .3));
 	}
 	#swatches {
-<<<<<<< HEAD
 		/*width: auto;*/
 		justify-content: flex-start;
 		padding-right: 1rem;
 	}
 	.innerUserModal {
 		height: 25rem;
-=======
-
-		/*width: auto;*/
-
-		justify-content: flex-start;
-		padding-right: 1em;
-	}
-	.innerUserModal {
-		height: 25em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		display: flex;
 		flex-flow: row wrap;
 		justify-content: center;
@@ -781,19 +603,10 @@ g g:hover * {
 	.activeModal h2.artistTitle {
 		position: fixed;
 		z-index: 60;
-<<<<<<< HEAD
 		top: 1rem;
 		left: 12rem;
 		font-size: 1.5rem;
 		padding-left: .5rem;
-=======
-		top: 1em;
-
-		left: 8em;
-
-		font-size: 1.5em;
-		padding-left: .5em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		margin: 0;
 		border-left: 1px solid #444;
 		border-top: 0px;
@@ -819,34 +632,19 @@ g g:hover * {
 		padding-left: 20em;
 	}
 	.nav {
-<<<<<<< HEAD
 		height: 5rem;
 	}
 	.icon {
 		width: 4em;
 		margin: 0 1rem 0 0;
-=======
-		height: 5em;
-	}
-	.icon {
-		width: 4em;
-		margin: 0 1em 0 0;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		transition: .2s;
 		cursor: pointer;
 	}
 	.about {
-<<<<<<< HEAD
 		height: 0em;
 	}
 	.about h3 {
 		margin: 1rem 0 0 0em;
-=======
-		height: 20em;
-	}
-	.about h3 {
-		margin: 1em 0 0 0em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	}
 	.avatar {
 		position: fixed;
@@ -857,7 +655,6 @@ g g:hover * {
 	}
 	.modalTitle {
 		z-index: 60;
-<<<<<<< HEAD
 		top: 2rem;
 		left: 25rem;
 		font-size: 3rem;
@@ -868,54 +665,25 @@ g g:hover * {
 		left: 23rem;
 		font-size: 3rem;
 		padding: 1rem 1rem 1rem 1.5rem;
-=======
-		top: 2em;
-		left: 25em;
-		font-size: 3em;
-		padding-left: 2em;
-	}
-	.activeModal h2.artistTitle {
-		top: 1em;
-		left: 8em;
-
-		font-size: 3em;
-		padding: 1em 1em 1em 1.5em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		margin: 0;
 		border-left: 1px solid #444;
 	}
 	.activeModal {
-<<<<<<< HEAD
 		padding: 7rem 2rem 0;
 	}
 	.activeModal.SVGbox {
 		padding: 6rem 1rem 4rem;
-=======
-		padding: 7em 2em 0;
-	}
-	.activeModal.SVGbox {
-		padding: 6em 1em 4em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	}
 	.activeModal.SVGbox h2 {
 		/*top: 4em;*/
 	}
 	.activeModal.SVGbox p {
-<<<<<<< HEAD
 		top: 8rem;
 	}
 	.swatch,
 	.erasor {
 		height: 2rem;
 		width: 4.5rem;
-=======
-		top: 8em;
-	}
-	.swatch,
-	.erasor {
-		height: 2em;
-		width: 4.5em;
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	}
 	/* HDTV */
 	@media screen and (min-width: 84em) {

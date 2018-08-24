@@ -24,11 +24,11 @@
 
 		<div class="hamburger" id="hamburger">
 			<div class="menu" id="menu">
-				<div id="helpBtn" class="icon">
-					<?php include 'icon/help.svg'; ?>
-				</div>
 				<div id="userBtn" class="icon">
 					<?php include 'icon/login.svg'; ?>
+				</div>
+				<div id="helpBtn" class="icon">
+					<?php include 'icon/help.svg'; ?>
 				</div>
 				<div id="XoutBtn" class="icon hide">
 					<?php include 'icon/Xout.svg'; ?>
