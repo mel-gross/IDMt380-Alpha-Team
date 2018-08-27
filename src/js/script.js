@@ -323,7 +323,6 @@ var theScheme = schemes[Math.floor(Math.random() * schemes.length)];
 
 
 $('#palettes').on('click', function () {
->>>>>>> master
 	$(this).toggleClass('open');
 });
 
