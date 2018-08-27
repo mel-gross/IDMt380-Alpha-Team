@@ -14,7 +14,7 @@
 	</form>
 	<div class="info hide" id="info">
 	<h2 class="yourName" id="yourName">Your Info</h2>
-		<img class="yourImg" id="yourImg" src="" alt="Profile Image">
+		<img class="yourImg" id="randomAvatar" src="" alt="Profile Image">
 		<button class="infoBtn" id="exportAllBtn">Export Images</button>
 		<button class="infoBtn" id="clearAllBtn">Clear Images</button>
 		<button class="infoBtn" id="logout">Log Out</button>

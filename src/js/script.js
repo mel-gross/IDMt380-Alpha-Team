@@ -1,6 +1,9 @@
+
+
 function load() {
-	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events', 'none');
+	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	$('svg').addClass('svg');
+	// scaleVal(30);
 }
 
 
@@ -12,32 +15,12 @@ var activeLit = 60;
 var theScale;
 
 
-function clearImage(which) {
-	if (which === 'all') {
-		if (confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
-			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');
-		}
-	} else {
-		var toClear = $(which).children[0].children[0].children;
-		console.log(which);
-		for (var i = 0; i < toClear.length; i++) {
-			for (var j = 0; j < toClear[i].children.length; j++) {
-				$(toClear[i].children[j]).css('fill', '#ffffff');
-			}
-		}
-	}
-}
 
-// $('#gallery svg *, #gallery svg g *').mousedown(function(){
-//   $(this).css("fill", activeColor);
-// });
-
-
-$('g g').on('click', function () {
+$('g g').on('click', function() {
 	setUndo(this.children);
 	if (backCount > 0) {
 		for (var i = 0; i < backCount.length; i++) {
-			priorMoves.splice(0, 1);
+ 		return priorMoves.splice(0, 1);
 		}
 	}
 	backCount = 0;
@@ -46,17 +29,19 @@ $('g g').on('click', function () {
 });
 
 
+
 function clearImage(which) {
 	if (which === 'all') {
-		if (confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
-			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
 		}
-	} else {
+	}
+	else {
 		var toClear = $(which).children[0].children[0].children;
 		console.log(which);
 		for (var i = 0; i < toClear.length; i++) {
 			for (var j = 0; j < toClear[i].children.length; j++) {
-				$(toClear[i].children[j]).css('fill', '#ffffff');
+				$(toClear[i].children[j]).css('fill','#ffffff');
 			}
 		}
 	}
@@ -66,6 +51,13 @@ function clearImage(which) {
 // 	  	$(this).css("fill", activeColor);		
 // 	}
 // });
+
+
+// $('#gallery svg *, #gallery svg g *').click(function(){
+
+
+
+// var brushing = setInterval(brush,50);
 
 
 function scaleVal(incr) {
@@ -106,15 +98,13 @@ function scaleVal(incr) {
 var swatchI = 0;
 var imageI = 0;
 
-
-$(document).on('keypress', function (event) {
+$(document).on('keypress', function(event) {
 
 // q = Exit out of modals
 	log(event.keyCode);
 	if (event.keyCode === 113) {
 		closeModals();
 	}
-
 
 // ,/. = Zoom in/out
 	if (event.keyCode === 44 ) {
@@ -150,7 +140,6 @@ $(document).on('keypress', function (event) {
 	// if (event.keyCode === 117) {
 	// 	openModal('#userModal');
 	// }
-
 
 // 1-0 = Switch images
 
@@ -238,7 +227,7 @@ if (event.keyCode === 103) {
 
 });
 
-$('.eyeDrop path, .eyeDrop * path').click(function () {
+$('.eyeDrop path, .eyeDrop * path').click(function(){
 	log();
 });
 
@@ -248,21 +237,19 @@ var x, y, w, h;
 document.addEventListener('mousemove', onMouseUpdate, false);
 
 var down = false;
-$('#colorPicker, .SVGbox').mousedown(function () {
+$('#colorPicker, .SVGbox').mousedown(function(){
 	down = true;
 	idleTime = 0;
 });
 
-$('#colorPicker').click(function () {
+$('#colorPicker').click(function(){
 	idleTime = 0;
 	x = event.clientX - $('#colorPicker').offset().left;
 	y = event.clientY - $('#colorPicker').offset().top;
 	clickMove(x, y);
 });
 
-$('#colorPicker, .SVGbox').mouseup(function () {
-	down = false;
-});
+$('#colorPicker, .SVGbox').mouseup(function() {down = false;});
 // $('#colorPicker, .SVGbox').mouseout(function() {down = false;});
 
 function onMouseUpdate(e) {
@@ -270,23 +257,23 @@ function onMouseUpdate(e) {
 	y = e.clientY - $('#colorPicker').offset().top;
 
 	if (x > 0 && y > 0 && down) {
-		idleTime = 0;
+		idleTime=0;
 		clickMove(x, y);
 	}
 
 }
 
 function clickMove(x, y) {
-	activeHue = Math.floor(360 * x / w);
-	activeLit = 100 - Math.floor(100 * y / h);
+	activeHue = Math.floor(360*x/w);
+	activeLit = 100 - Math.floor(100*y/h);
 
 	pickerButton.style.left = x + "px";
 	pickerButton.style.top = y + "px";
-	changeColor(activeHue, activeSat, activeLit);
+	changeColor(activeHue, activeSat, activeLit);	
 }
 
 
-function changeColor(hue, sat, lit) {
+function changeColor(hue,sat,lit) {
 	activeColor = "hsl(" + hue + ", " + sat + "%, " + lit + "%)";
 	console.log(activeColor);
 
@@ -318,24 +305,22 @@ for (var i = 0; i < palettes.children.length; i++) {
 	palettes.children[i].style.background = "linear-gradient(90deg, " + first + " 0%, " + second + " 33%, " + third + " 67%, " + fourth + " 100%)";
 }
 
-var theScheme = schemes[Math.floor(Math.random() * schemes.length)];
+var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
 
 
 
-$('#palettes').on('click', function () {
+$('#palettes').on('click',function() {
 	$(this).toggleClass('open');
 });
 
 
-$('.palette').on('click', function () {
-	changePalette(this)
-});
+$('.palette').on('click',function(){changePalette(this)});
 
 function changePalette(that) {
 	console.log(that);
 	theScheme = [];
-	if (that !== undefined) {
-		console.log(that);
+	if(that !== undefined) {
+	console.log(that);
 		for (var i = 0; i < that.children.length; i++) {
 			theScheme.push(that.children[i].innerHTML);
 		}
@@ -347,10 +332,10 @@ function changePalette(that) {
 
 function setSwatches(theScheme) {
 
-	// changePalette();
-	console.log(theScheme);
+		// changePalette();
+		console.log(theScheme);
 
-	for (var i = 0; i < $('.swatch').length; i++) {
+		for (var i = 0; i < $('.swatch').length; i++) {
 
 		// activeHue = Math.floor(Math.random() * 360);
 		// activeLit = Math.floor(25 + Math.random() * 51);
@@ -360,16 +345,15 @@ function setSwatches(theScheme) {
 
 		console.log(swatches.children[i]);
 
-		activeColor = "hsl(" + activeHue + ", " + activeSat + "%, " + activeLit + "%)";
+		activeColor =  "hsl(" + activeHue + ", " + activeSat + "%, " + activeLit + "%)";
 
 		swatches.children[i].style.background = activeColor;
 		swatches.children[i].value = activeColor;
-		changeColor(activeHue, activeSat, activeLit);
+		changeColor(activeHue,activeSat,activeLit);
 		movePicker();
 
 	}
 }
-
 
 
 $('.swatch').click(function(){switchSwatch(this)});
@@ -384,47 +368,46 @@ function switchSwatch(which) {
 	movePicker(colorArray[0],colorArray[2]);
 }
 
-
 // Show color picker when you click a swatch, and hide it when you idle 
 
 var idleInterval;
 var idleTime = 0;
 
-$('#swatches').on('doubletap', function (event) {
+$('#swatches').on('doubletap',function(event){
 	showRainbow();
 });
 
-$('#swatches').dblclick(function () {
+$('#swatches').dblclick(function(){
 	showRainbow();
 });
 
 function showRainbow() {
 	$('#toolkits').addClass('showRainbow');
 	clearInterval(idleInterval);
-	idleInterval = setInterval(timer, 1000);
+    idleInterval = setInterval(timer, 1000); 
 }
 
 
-$('.SVGbox').click(function () {
+$('.SVGbox').click(function(){
 	$('#toolkits').removeClass('showRainbow');
 	$('#palettes').removeClass('open');
 
 });
 
 function timer() {
-	idleTime++;
-	if (idleTime > 3) {
-		$('#toolkits').removeClass('showRainbow');
-		idleTime = 0;
-	}
+    idleTime++;
+    if (idleTime > 3) {
+        $('#toolkits').removeClass('showRainbow');
+        idleTime = 0;
+    }
 }
 
 
 function movePicker(left, top) {
 	w = colorPicker.clientWidth;
 	h = colorPicker.clientHeight;
-	pickerButton.style.left = (w * left / 360) + "px";
-	pickerButton.style.top = (h * (1 - top / 100)) + "px";
+	pickerButton.style.left = (w*left/360) + "px";
+	pickerButton.style.top = (h*(1-top/100)) + "px";
 
 	console.log("picker left = " + pickerButton.style.left + ", picker top = " + pickerButton.style.top);
 }
@@ -434,19 +417,11 @@ function movePicker(left, top) {
 // UI INTERACTIONS
 
 
-$('#title').click(function () {
-	closeModals()
-});
-$('#userBtn').click(function () {
-	openModal('#userModal')
-});
-$('#helpBtn').click(function () {
-	openModal('#helpModal')
-});
-
+$('#title').click(function (){closeModals()});
+$('#userBtn').click(function (){openModal('#userModal')});
+$('#helpBtn').click(function (){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
-
 	if ($(this).hasClass('activeModal')) {
 	console.log('already open');		
 	} else {
@@ -455,21 +430,21 @@ $("#gallery").on("click", ".SVGbox", function() {
 });
 
 function openImage(that) {
+
 	openModal(that);
 	$('#toolkits').removeClass('hide');
 	title.src = "img/auroraLogo.png";
 	nav.style.background = 'transparent';
-	$('#title, .icon svg').css('filter', 'none');
-	$('.icon svg path').css('fill', '#2f2f2f');
+	$('#title, .icon svg').css('filter','none');
+	$('.icon svg path').css('fill','#2f2f2f');
 
 	if (!swatchOpened) {
-		// let selector = " " + that + " "
-		theScale = parseInt($(that).css('height'), 10);
-		setTimeout(function () {
-			setSwatches();
-		}, 500);
+		setTimeout(function(){setSwatches(theScheme);}, 500);		
 		swatchOpened = true;
 	}
+	// let selector = " " + that + " "
+	theScale = parseInt($(that).css('height'),10);
+
 }
 
 
@@ -477,9 +452,9 @@ function openImage(that) {
 function openModal(modal) {
 	if ($(modal).hasClass('activeModal') && (!$(modal).hasClass('SVGbox'))) {
 		closeModals();
-	} else {
+	}else {
 		title.src = "img/auroraLogoL.png";
-		$('.SVGbox svg').css('height', '15rem');
+		$('.SVGbox svg').css('height','15rem');
 		$('*').removeClass('activeModal');
 		if ($(modal).is('#userModal')) {			
 			$('#userBtn svg path').css('fill','#ffba40');
@@ -489,21 +464,21 @@ function openModal(modal) {
 			$('#helpBtn svg path').css('fill','#86fff7');
 			$('#helpBtn img').attr('src','icon/helpOpen.png');
 }
-
 		$(modal).addClass('activeModal');
+	}
 }
 
 function closeModals() {
 	$('.activeModal svg').css('height','15rem');
+	// theScale = 10;
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
 
 	title.src = "img/auroraLogoL.png";
 	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
-
+	$('#userBtn svg path, #helpBtn svg path').css('fill','#f5f5f5');
 	$('#helpBtn img').attr('src','icon/help.png');
-	$('#userBtn svg path, #helpBtn svg path').css('fill', '#f5f5f5');
-	$('#title, .icon svg').css('filter', 'drop-shadow(0 0 10px black)');
+	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
 
 	priorMoves = [];
 	backCount = 0;
@@ -522,28 +497,28 @@ function log(log) {
 var priorMoves = [];
 var backCount = 0;
 
-function setUndo(el) {
+function setUndo(el){
 
 	let lastMove = [];
 	for (var i = 0; i < el.length; i++) {
-		let lastMoves = new Object();
-		lastMoves.el = el[i];
-		if (el[i].style.fill !== "") {
-			lastMoves.fillColor = el[i].style.fill;
-		} else {
-			lastMoves.fillColor = "#ffffff";
-		}
-		lastMove.push(lastMoves);
+	    let lastMoves = new Object();
+	    lastMoves.el = el[i];
+	    if (el[i].style.fill !== "") {
+		    lastMoves.fillColor = el[i].style.fill;	    	
+	    } else {
+		    lastMoves.fillColor = "#ffffff";	    	
+	    }
+	    lastMove.push(lastMoves);
 	}
-	//Adding last move to an array of past actions
-	// priorMoves.push(lastMove);
+    //Adding last move to an array of past actions
+    // priorMoves.push(lastMove);
 	if (el[0].style.fill !== lastMove[0].fillColor) {
-		priorMoves.unshift(lastMove);
+ 	   priorMoves.unshift(lastMove);
 
-		//Number sets length of history array. Limits how much memory app will take up
-		if (priorMoves[39]) {
-			priorMoves.length = 40;
-		}
+    //Number sets length of history array. Limits how much memory app will take up
+    if (priorMoves[39]){
+        priorMoves.length = 40;
+    }
 	}
 }
 
@@ -556,23 +531,8 @@ function undo() {
 			$(priorMoves[backCount][i].el).css('fill', priorMoves[backCount][i].fillColor);
 		}
 	}
-	if (backCount < priorMoves.length - 1) {
+	if (backCount < priorMoves.length -1) {		
 		backCount++;
-	}
+	} 
 
 }
-
-
-
-//random avatar function
-var image = new Array();
-image[0] = "src/img/avatars/avatar1.png";
-image[1] = "src/img/avatars/avatar2.png";
-image[2] = "src/img/avatars/avatar3.png";
-image[3] = "src/img/avatars/avatar4.png";
-image[4] = "src/img/avatars/avatar5.png";
-image[5] = "src/img/avatars/avatar6.png";
-var size = image.length
-var x = Math.floor(size * Math.random())
-
-$('#randomAvatar').attr('src', image[x]);
