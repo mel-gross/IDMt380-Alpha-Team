@@ -3,11 +3,7 @@
 function load() {
 	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	$('svg').addClass('svg');
-<<<<<<< HEAD
-	// scaleVal(30);
-=======
 	setSwatches(theScheme);
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 }
 
 
@@ -18,8 +14,6 @@ var activeLit = 60;
 
 var theScale;
 
-
-<<<<<<< HEAD
 
 $('g g').on('click', function() {
 	setUndo(this.children);
@@ -51,13 +45,6 @@ function clearImage(which) {
 		}
 	}
 }
-// $('#gallery svg *, #gallery svg g *').hover(function(){
-// 	if (down) {
-// 	  	$(this).css("fill", activeColor);		
-// 	}
-// });
-=======
-
 
 // $('#gallery svg *, #gallery svg g *').mousedown(function(){
 //   $(this).css("fill", activeColor);
@@ -75,7 +62,30 @@ $('g g').on('click', function() {
 	var selector = '#' + this.id + ' *';
 	$(selector).css('fill', activeColor);
 });
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
 
 
 
@@ -107,18 +117,6 @@ function clearImage(which) {
 
 
 // var brushing = setInterval(brush,50);
-
-<<<<<<< HEAD
-=======
-var scaleTo = changeScale.value;
-var check = setInterval(scaleVal,10);
-
-function scaleVal() {
-	scaleTo = changeScale.value;
-	// $('.activeModal svg').css('transform','scale(' + (scaleTo/20) + ')');
-	$('.activeModal svg').css('height', scaleTo*3 + '%');
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
-
 function scaleVal(incr) {
 	theScale *= incr;
 	console.log(theScale);
@@ -166,30 +164,21 @@ $(document).on('keypress', function(event) {
 
 // ,/. = Zoom in/out
 	if (event.keyCode === 44 ) {
-<<<<<<< HEAD
 		scaleVal(0.9);
 	}
 	if (event.keyCode === 46 ) {
 		scaleVal(1.1);
-=======
-		changeScale.value -=2;
-		scaleVal();
 	}
-	if (event.keyCode === 46 ) {
-		changeScale.value++;
-		changeScale.value++;
-		scaleVal();
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
-	}
+
 
 // c = Show color picker
 	if (event.keyCode === 99 ) {
-	if ($('#toolkits').hasClass('showRainbow')) {
-        $('#toolkits').removeClass('showRainbow');		
-	} else {
-		showRainbow();
-	}
-	}
+		if ($('#toolkits').hasClass('showRainbow')) {
+	        $('#toolkits').removeClass('showRainbow');		
+		} else {
+			showRainbow();
+		}
+	}	
 
 // ^W = Wipe ALL images
 	if (event.keyCode === 87) {
@@ -209,28 +198,17 @@ $(document).on('keypress', function(event) {
 		openModal('#userModal');
 	}
 
-<<<<<<< HEAD
-// b/n = Switch Swatches
 
-		if (event.keyCode === 118) {
-			index--;
-			if (index <= 0) {index = gallery.children.length-1;}
-=======
 // b/n = Open last/next image
 
 		if (event.keyCode === 118) {
 			index--;
 			if (index < 0) {index = gallery.children.length-1;}
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 			openImage(gallery.children[index]);
 		}
 		if (event.keyCode === 98) {
 			index++;
-<<<<<<< HEAD
 			if (index >= gallery.children.length-1) {index = 0;}			
-=======
-			if (index > gallery.children.length-1) {index = 0;}			
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 			openImage(gallery.children[index]);
 		}
 
@@ -325,12 +303,7 @@ for (var i = 0; i < palettes.children.length; i++) {
 	palettes.children[i].style.background = "linear-gradient(90deg, " + first + " 0%, " + second + " 33%, " + third + " 67%, " + fourth + " 100%)";
 }
 
-<<<<<<< HEAD
 var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
-=======
-theScheme = schemes[Math.floor(Math.random()*schemes.length)];
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
-
 
 
 $('#palettes').on('click',function() {
@@ -342,11 +315,7 @@ $('.palette').on('click',function(){changePalette(this)});
 
 function changePalette(that) {
 	console.log(that);
-<<<<<<< HEAD
 	theScheme = [];
-=======
-	var theScheme = [];
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 	if(that !== undefined) {
 	console.log(that);
 		for (var i = 0; i < that.children.length; i++) {
@@ -452,10 +421,6 @@ $("#gallery").on("click", ".SVGbox", function() {
 });
 
 function openImage(that) {
-<<<<<<< HEAD
-
-=======
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 	openModal(that);
 	$('#toolkits').removeClass('hide');
 	title.src = "img/auroraLogo.png";
@@ -464,17 +429,11 @@ function openImage(that) {
 	$('.icon svg path').css('fill','#2f2f2f');
 
 	if (!swatchOpened) {
-<<<<<<< HEAD
-		setTimeout(function(){setSwatches(theScheme);}, 500);		
-		swatchOpened = true;
-	}
 	// let selector = " " + that + " "
 	theScale = parseInt($(that).css('height'),10);
-=======
 		setTimeout(function(){setSwatches();}, 500);		
 		swatchOpened = true;
 	}
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 
 }
 
@@ -501,11 +460,6 @@ function openModal(modal) {
 
 function closeModals() {
 	$('.activeModal svg').css('height','15rem');
-<<<<<<< HEAD
-	// theScale = 10;
-=======
-	changeScale.value = 10;
->>>>>>> 7eaa8bac82b66c2699716bfd0a3d4afb40e2e395
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
 
