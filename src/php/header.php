@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Fredericka+the+Great" rel="stylesheet">
 </head>
 
-<body onload="load()">
+<body >
 
 <div id="wrapper" class="wrapper">
 
@@ -25,10 +25,7 @@
 		<div class="hamburger" id="hamburger">
 			<div class="menu" id="menu">
 				<div id="helpBtn" class="icon">
-					<?php include 'icon/help.svg'; ?>
-				</div>
-				<div id="userBtn" class="icon">
-					<?php include 'icon/login.svg'; ?>
+					<img src="icon/help.png" alt="">
 				</div>
 				<div id="XoutBtn" class="icon hide">
 					<?php include 'icon/Xout.svg'; ?>
