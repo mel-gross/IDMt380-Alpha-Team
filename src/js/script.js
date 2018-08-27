@@ -3,7 +3,11 @@
 function load() {
 	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	$('svg').addClass('svg');
+<<<<<<< HEAD
 	// scaleVal(30);
+=======
+	setSwatches(theScheme);
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 }
 
 
@@ -15,6 +19,7 @@ var activeLit = 60;
 var theScale;
 
 
+<<<<<<< HEAD
 
 $('g g').on('click', function() {
 	setUndo(this.children);
@@ -51,6 +56,106 @@ function clearImage(which) {
 // 	  	$(this).css("fill", activeColor);		
 // 	}
 // });
+=======
+$('g g').on('click', function() {
+	setUndo(this.children);
+	if (backCount > 0) {
+		for (var i = 0; i < backCount.length; i++) {
+ 		return priorMoves.splice(0, 1);
+		}
+	}
+	backCount = 0;
+	var selector = '#' + this.id + ' *';
+	$(selector).css('fill', activeColor);
+});
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
+
+// $('#gallery svg *, #gallery svg g *').mousedown(function(){
+//   $(this).css("fill", activeColor);
+// });
+
+
+$('g g').on('click', function() {
+	setUndo(this.children);
+	if (backCount > 0) {
+		for (var i = 0; i < backCount.length; i++) {
+ 		priorMoves.splice(0, 1);
+		}
+	}
+	backCount = 0;
+	var selector = '#' + this.id + ' *';
+	$(selector).css('fill', activeColor);
+});
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
+
+
+
+<<<<<<< HEAD
+
+=======
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
 
 
 // $('#gallery svg *, #gallery svg g *').click(function(){
@@ -58,8 +163,7 @@ function clearImage(which) {
 
 
 // var brushing = setInterval(brush,50);
-
-
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 function scaleVal(incr) {
 	theScale *= incr;
 	console.log(theScale);
@@ -95,8 +199,13 @@ function scaleVal(incr) {
 
 
 //  HOT KEYS
+<<<<<<< HEAD
 var swatchI = 0;
 var imageI = 0;
+
+$(document).on('keypress', function(event) {
+=======
+var index = 0;
 
 $(document).on('keypress', function(event) {
 
@@ -106,6 +215,22 @@ $(document).on('keypress', function(event) {
 		closeModals();
 	}
 
+// ,/. = Zoom in/out
+	if (event.keyCode === 44 ) {
+		scaleVal(0.9);
+	}
+	if (event.keyCode === 46 ) {
+		scaleVal(1.1);
+	}
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
+
+// q = Exit out of modals
+	log(event.keyCode);
+	if (event.keyCode === 113) {
+		closeModals();
+	}
+
+<<<<<<< HEAD
 // ,/. = Zoom in/out
 	if (event.keyCode === 44 ) {
 		scaleVal(0.9);
@@ -221,6 +346,58 @@ if (event.keyCode === 103) {
 }
 
 // z = Undo
+=======
+// c = Show color picker
+	if (event.keyCode === 99 ) {
+		if ($('#toolkits').hasClass('showRainbow')) {
+	        $('#toolkits').removeClass('showRainbow');		
+		} else {
+			showRainbow();
+		}
+	}	
+
+// ^W = Wipe ALL images
+	if (event.keyCode === 87) {
+		clearImage('all');
+	}
+
+// w = Wipe open image
+	if (event.keyCode === 119) {
+		clearImage('.SVGbox.activeModal');
+	}
+
+// u/i = Open account/info pages
+	if (event.keyCode === 105) {
+		openModal('#helpModal');
+	}
+	if (event.keyCode === 117) {
+		openModal('#userModal');
+	}
+
+
+// b/n = Open last/next image
+
+		if (event.keyCode === 118) {
+			index--;
+			if (index < 0) {index = gallery.children.length-1;}
+			openImage(gallery.children[index]);
+		}
+		if (event.keyCode === 98) {
+			index++;
+			if (index >= gallery.children.length-1) {index = 0;}			
+			openImage(gallery.children[index]);
+		}
+
+		if (event.keyCode === 103) {
+			if (!groupMode.checked) {
+				groupMode.checked = true;
+			}
+			else {
+				groupMode.checked = false;
+			}
+		}
+
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 	if (event.keyCode === 122) {
 		undo();
 	}
@@ -308,7 +485,10 @@ for (var i = 0; i < palettes.children.length; i++) {
 var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 $('#palettes').on('click',function() {
 	$(this).toggleClass('open');
 });
@@ -422,6 +602,7 @@ $('#userBtn').click(function (){openModal('#userModal')});
 $('#helpBtn').click(function (){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
+<<<<<<< HEAD
 	if ($(this).hasClass('activeModal')) {
 	console.log('already open');		
 	} else {
@@ -431,6 +612,12 @@ $("#gallery").on("click", ".SVGbox", function() {
 
 function openImage(that) {
 
+=======
+	openImage(this);
+});
+
+function openImage(that) {
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 	openModal(that);
 	$('#toolkits').removeClass('hide');
 	title.src = "img/auroraLogo.png";
@@ -439,11 +626,19 @@ function openImage(that) {
 	$('.icon svg path').css('fill','#2f2f2f');
 
 	if (!swatchOpened) {
+<<<<<<< HEAD
 		setTimeout(function(){setSwatches(theScheme);}, 500);		
 		swatchOpened = true;
 	}
 	// let selector = " " + that + " "
 	theScale = parseInt($(that).css('height'),10);
+=======
+	// let selector = " " + that + " "
+	theScale = parseInt($(that).css('height'),10);
+		setTimeout(function(){setSwatches();}, 500);		
+		swatchOpened = true;
+	}
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 
 }
 
@@ -470,14 +665,20 @@ function openModal(modal) {
 
 function closeModals() {
 	$('.activeModal svg').css('height','15rem');
+<<<<<<< HEAD
 	// theScale = 10;
+=======
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
 
 	title.src = "img/auroraLogoL.png";
 	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
 	$('#userBtn svg path, #helpBtn svg path').css('fill','#f5f5f5');
+<<<<<<< HEAD
 	$('#helpBtn img').attr('src','icon/help.png');
+=======
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
 
 	priorMoves = [];

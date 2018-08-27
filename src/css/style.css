@@ -174,7 +174,7 @@ g g:hover * {
 	/*height: 17em;*/
 	margin: 0 0rem 6em;
 	/*padding: 1rem 0;*/
-	transition: .5s;
+	transition: .3s;
 	flex-grow: 1;
 }
 
@@ -202,6 +202,13 @@ g g:hover * {
 .toolkits {
 	width: 100%;
 	pointer-events: none !important;
+	transition: .2s;
+	z-index: 6;
+}
+
+.toolkits * {
+	pointer-events: all;
+	/*width: auto;*/
 	transition: .2s;
 	z-index: 6;
 }
@@ -238,6 +245,18 @@ g g:hover * {
 
 .toolBar * {
 	pointer-events: all;
+	flex-flow: column nowrap;
+	justify-content: flex-end;
+	position: fixed;
+	bottom: 10em;
+	left: 0;
+	padding: 0 1rem;
+	height: 100%;
+	/*width: 4rem;*/
+	min-width: 4rem;
+	color: #444;
+	/*font-size: 2rem;*/
+	/*z-index: 30;*/
 }
 
 .colorPicker {
@@ -330,6 +349,35 @@ g g:hover * {
 	flex: 1 0 26%;
 	height: 2rem;
 	width: 2rem;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
+	border: 1px solid black;
+	border-radius: 2px;
+	overflow: hidden;
+	background: url(../icon/palette.png);
+	background-size: cover;
+	cursor: pointer;
+}
+
+#palettes * {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#palettes.open {
+	overflow-x: auto;
+	width: 100%;
+	height: auto;
+	background: transparent;
+}
+#palettes.open .palette {
+	opacity: 1;
+	pointer-events: all;
+}
+.palette {
+	flex: 1 0 26%;
+	height: 2rem;
+	width: 2rem;
 	background: black;
 	margin-right: .5rem;
 	margin-bottom: .5rem;
@@ -337,6 +385,48 @@ g g:hover * {
 	border-radius: 2px;
 }
 
+#palettes * {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#palettes.open {
+	overflow-x: auto;
+	width: 100%;
+	height: auto;
+	background: transparent;
+}
+#palettes.open .palette {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.palette {
+	flex: 1 0 26%;
+	height: 2rem;
+	width: 2rem;
+	background: black;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
+	border: 1px solid black;
+	border-radius: 2px;
+}
+
+
+
+.palette p {
+	display: none;
+}
+
+
+.palette p {
+	display: none;
+}
+
+
+.palette p {
+	display: none;
+}
 
 
 .palette p {
@@ -672,7 +762,6 @@ g g:hover * {
 		transition: .2s;
 		cursor: pointer;
 	}
-
 	.about {
 		height: 0em;
 	}
@@ -712,9 +801,6 @@ g g:hover * {
 	}
 	.activeModal.SVGbox p {
 		top: 8rem;
-	}
-	.toolBar {
-		/*bottom: 9.5em;*/
 	}
 	.swatch,
 	.erasor {
