@@ -2,8 +2,15 @@
 
 	<div id="toolBar" class="toolBar">
 		<!-- <input id="groupMode" type="checkbox">Group Colors -->
+<<<<<<< HEAD
+	 	<!-- <input id="changeScale" type="range" min="5" max="50" value="10" onchange="checkVal()"> -->
+	 	<div class="icon" id="zoomOut" onclick="scaleVal(0.9)"><img src="icon/zoomOut.png" alt=""></div>
+	 	<div class="icon" id="zoomIn" onclick="scaleVal(1.1)"><img src="icon/zoomIn.png" alt=""></div>
+	 	<div class="icon undoBtn" onclick="undo()"><img src="icon/undo.png" alt=""></div>
+=======
 	 	<div class="icon" id="zoomOut" onclick="scaleVal(0.9)"><?php include 'icon/zoomOut.svg'; ?></div>
 	 	<div class="icon" id="zoomIn" onclick="scaleVal(1.1)"><?php include 'icon/zoomIn.svg'; ?></div>
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 		<div class="icon" id="palettes">
 			<div class="palette">
 				<p>#FFFFFF</p>

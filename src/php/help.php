@@ -16,13 +16,16 @@
 	<div class="accordion">
 		<h2>Shortcuts</h2>
 		<p class="helpP"><i>Optimize</i> your workflow by using <i>keyboard shortcuts</i>. Here's a list of how you can avoid the mouse and GUI of this visual painting app!
-			<br><i>v</i> : Open last image in gallery 
-			<br><i>b</i> : Open next image in gallery 
+			<br><i>1-0</i> : Open image in gallery 
 			<br><i>z</i> : Undo your last action 
 			<br><i>c</i> : Toggle your color picker 
 			<br><i>q</i> : Quit out to the gallery menu 
 			<br><i>^W</i> : Clear all images 
-			<br><i>u</i> : View user screen 
+			<br><i>v | ^V</i> : Switch Swatches
+			<br><i>h | ^H</i> : Shift Hue 
+			<br><i>b | ^B</i> : Shift Brightness 
+			<br><i>, | .</i> : Zoom Out/In 
+			<!-- <br><i>u</i> : View user screen  -->
 			<br><i>i</i> : View info screen (this screen) 
 	</p>
 	</div>

@@ -45,7 +45,11 @@
 		
 		<div class="SVGbox">
 			<div class="innerBox">
+<<<<<<< HEAD
+			<?php include 'img/htmlsvgs/Lewig_Maxime_outline_section.html'; ?>	
+=======
 			<?php include 'img/htmlsvgs/Lewing_Maxime_outline_section.html'; ?>	
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 			<h2 class="artistTitle">Maxime Lewing</h2>	
 			<p></p>	
 			</div>

@@ -83,13 +83,35 @@ button {
 
 .icon {
 	width: 2em;
-
 	height: 2em;
-
-	margin: 0 .5rem 0 0;
+	margin: 0 .5rem .5rem 0;
 	transition: .2s;
 	pointer-events: all;
 	cursor: pointer;
+}
+
+.icon:not(.open):hover {
+	-webkit-animation: wiggle .5s ease 0s 1;
+	-o-animation: wiggle .5s ease 0s 1;
+	animation: wiggle .5s ease 0s 1;
+}
+
+@keyframes wiggle {
+	0% {
+		transform: rotateZ(0deg);
+	}
+	20% {
+		transform: rotateZ(-30deg);
+	}
+	50% {
+		transform: rotateZ(30deg);
+	}
+	70% {
+		transform: rotateZ(-10deg);
+	}
+	100% {
+		transform: rotateZ(0deg);
+	}
 }
 
 .icon svg {
@@ -101,7 +123,7 @@ button {
 }
 
 g g * {
-	transition: .2s;
+	transition: .1s;
 
 }
 g g:hover * {
@@ -187,8 +209,14 @@ g g:hover * {
 .toolkits * {
 	pointer-events: all;
 	/*width: auto;*/
-
 	transition: .2s;
+	z-index: 6;
+}
+
+.toolkits * {
+	pointer-events: all;
+	/*width: auto;*/
+	transition: .1s;
 	z-index: 6;
 }
 
@@ -200,6 +228,23 @@ g g:hover * {
 
 .toolBar {
 	display: flex;
+	flex-flow: row wrap;
+	justify-content: flex-start;
+	position: fixed;
+	bottom: 8.5em;
+	left: 0;
+	padding: 0 1rem;
+	height: auto;
+	/*width: 4rem;*/
+	width: 100%;
+	color: #444;
+	/*font-size: 2rem;*/
+	/*z-index: 30;*/
+	pointer-events: none;
+}
+
+.toolBar * {
+	pointer-events: all;
 	flex-flow: column nowrap;
 	justify-content: flex-end;
 	position: fixed;
@@ -275,8 +320,39 @@ g g:hover * {
 #palettes {
 	display: flex;
 	flex-flow: row wrap;
-	width: 2rem;
+	/*width: 2rem;*/
+	/*height: 2rem;*/
+	overflow: hidden;
+	background: url(../icon/palette.png);
+	background-size: cover;
+	cursor: pointer;
+	transition: .3s;
+}
+
+#palettes * {
+	opacity: 0;
+	pointer-events: none;
+}
+
+#palettes.open {
+	overflow-x: auto;
+	width: 100%;
+	height: auto;
+	background: transparent;
+}
+#palettes.open .palette {
+	opacity: 1;
+	pointer-events: all;
+}
+
+.palette {
+	flex: 1 0 26%;
 	height: 2rem;
+	width: 2rem;
+	margin-right: .5rem;
+	margin-bottom: .5rem;
+	border: 1px solid black;
+	border-radius: 2px;
 	overflow: hidden;
 	background: url(../icon/palette.png);
 	background-size: cover;
@@ -336,6 +412,11 @@ g g:hover * {
 	border-radius: 2px;
 }
 
+
+
+.palette p {
+	display: none;
+}
 
 
 .palette p {
@@ -677,7 +758,7 @@ g g:hover * {
 	.icon {
 		width: 4em;
 		height: 4em;
-		margin: 0 1rem 0 0;
+		margin: 0 1rem 1rem 0;
 		transition: .2s;
 		cursor: pointer;
 	}

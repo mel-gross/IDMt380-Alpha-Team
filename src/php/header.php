@@ -24,8 +24,13 @@
 
 		<div class="hamburger" id="hamburger">
 			<div class="menu" id="menu">
+<<<<<<< HEAD
+				<div id="helpBtn" class="icon">
+					<img src="icon/help.png" alt="">
+=======
 				<div id="userBtn" class="icon">
 					<?php include 'icon/login.svg'; ?>
+>>>>>>> 660eae45d428e78958f5c1f71a58af7ea3b541b8
 				</div>
 				<div id="helpBtn" class="icon">
 					<?php include 'icon/help.svg'; ?>
