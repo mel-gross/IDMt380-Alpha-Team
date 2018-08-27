@@ -1,7 +1,7 @@
 
 
 function load() {
-	defaultCanvas();
+	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	$('svg').addClass('svg');
 	setSwatches(theScheme);
 }
@@ -12,13 +12,39 @@ var activeHue = 200;
 var activeSat = 100;
 var activeLit = 60;
 
+var theScale;
 
 
-function defaultCanvas() {
-	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
-	
+$('g g').on('click', function() {
+	setUndo(this.children);
+	if (backCount > 0) {
+		for (var i = 0; i < backCount.length; i++) {
+ 		return priorMoves.splice(0, 1);
+		}
+	}
+	backCount = 0;
+	var selector = '#' + this.id + ' *';
+	$(selector).css('fill', activeColor);
+});
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
 }
-
 
 // $('#gallery svg *, #gallery svg g *').mousedown(function(){
 //   $(this).css("fill", activeColor);
@@ -26,10 +52,59 @@ function defaultCanvas() {
 
 
 $('g g').on('click', function() {
-  var chosenGroup = '#' + this.id + ' *';
-  $(chosenGroup).css('fill', activeColor);
-
+	setUndo(this.children);
+	if (backCount > 0) {
+		for (var i = 0; i < backCount.length; i++) {
+ 		priorMoves.splice(0, 1);
+		}
+	}
+	backCount = 0;
+	var selector = '#' + this.id + ' *';
+	$(selector).css('fill', activeColor);
 });
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
 // $('#gallery svg *, #gallery svg g *').hover(function(){
 // 	if (down) {
 // 	  	$(this).css("fill", activeColor);		
@@ -42,15 +117,11 @@ $('g g').on('click', function() {
 
 
 // var brushing = setInterval(brush,50);
-
-var scaleTo = changeScale.value;
-var check = setInterval(scaleVal,10);
-
-function scaleVal() {
-	scaleTo = changeScale.value;
+function scaleVal(incr) {
+	theScale *= incr;
+	console.log(theScale);
 	// $('.activeModal svg').css('transform','scale(' + (scaleTo/20) + ')');
-	$('.activeModal svg').css('height', scaleTo*3 + '%');
-
+	$('.activeModal svg').css('height', theScale + 'px');
 }
 
 
@@ -80,30 +151,84 @@ function scaleVal() {
 
 
 
-//  TOOL KIT
-
-var bucket = false;
-var eyeDrop = false;
-var eraser = false;
-var marker = false;
-
+//  HOT KEYS
+var index = 0;
 
 $(document).on('keypress', function(event) {
-	hey(event.keyCode);
-	// Activate Bucket
-	if (event.keyCode == 32) {
-		if (!eyeDrop) {
-			$('activeModal.SVGbox svg').addClass('eyeDrop');
-			$('#toolkit div').removeClass('activeTool');
-			$('#eyeDropTool').addClass('activeTool');
-			eyeDrop = false;
-		}
-		eyeDrop = true;
+
+// q = Exit out of modals
+	log(event.keyCode);
+	if (event.keyCode === 113) {
+		closeModals();
 	}
+
+// ,/. = Zoom in/out
+	if (event.keyCode === 44 ) {
+		scaleVal(0.9);
+	}
+	if (event.keyCode === 46 ) {
+		scaleVal(1.1);
+	}
+
+
+// c = Show color picker
+	if (event.keyCode === 99 ) {
+		if ($('#toolkits').hasClass('showRainbow')) {
+	        $('#toolkits').removeClass('showRainbow');		
+		} else {
+			showRainbow();
+		}
+	}	
+
+// ^W = Wipe ALL images
+	if (event.keyCode === 87) {
+		clearImage('all');
+	}
+
+// w = Wipe open image
+	if (event.keyCode === 119) {
+		clearImage('.SVGbox.activeModal');
+	}
+
+// u/i = Open account/info pages
+	if (event.keyCode === 105) {
+		openModal('#helpModal');
+	}
+	if (event.keyCode === 117) {
+		openModal('#userModal');
+	}
+
+
+// b/n = Open last/next image
+
+		if (event.keyCode === 118) {
+			index--;
+			if (index < 0) {index = gallery.children.length-1;}
+			openImage(gallery.children[index]);
+		}
+		if (event.keyCode === 98) {
+			index++;
+			if (index >= gallery.children.length-1) {index = 0;}			
+			openImage(gallery.children[index]);
+		}
+
+		if (event.keyCode === 103) {
+			if (!groupMode.checked) {
+				groupMode.checked = true;
+			}
+			else {
+				groupMode.checked = false;
+			}
+		}
+
+	if (event.keyCode === 122) {
+		undo();
+	}
+
 });
 
 $('.eyeDrop path, .eyeDrop * path').click(function(){
-	hey();
+	log();
 });
 
 
@@ -125,10 +250,7 @@ $('#colorPicker').click(function(){
 });
 
 $('#colorPicker, .SVGbox').mouseup(function() {down = false;});
-<<<<<<< HEAD
 // $('#colorPicker, .SVGbox').mouseout(function() {down = false;});
-=======
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 
 function onMouseUpdate(e) {
 	x = e.clientX - $('#colorPicker').offset().left;
@@ -181,15 +303,10 @@ for (var i = 0; i < palettes.children.length; i++) {
 	palettes.children[i].style.background = "linear-gradient(90deg, " + first + " 0%, " + second + " 33%, " + third + " 67%, " + fourth + " 100%)";
 }
 
-theScheme = schemes[Math.floor(Math.random()*schemes.length)];
-
+var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
 
 
 $('#palettes').on('click',function() {
-<<<<<<< HEAD
-=======
-	console.log('hey');
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 	$(this).toggleClass('open');
 });
 
@@ -198,7 +315,7 @@ $('.palette').on('click',function(){changePalette(this)});
 
 function changePalette(that) {
 	console.log(that);
-	var theScheme = [];
+	theScheme = [];
 	if(that !== undefined) {
 	console.log(that);
 		for (var i = 0; i < that.children.length; i++) {
@@ -300,7 +417,11 @@ $('#userBtn').click(function (){openModal('#userModal')});
 $('#helpBtn').click(function (){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
-	openModal(this);
+	openImage(this);
+});
+
+function openImage(that) {
+	openModal(that);
 	$('#toolkits').removeClass('hide');
 	title.src = "img/auroraLogo.png";
 	nav.style.background = 'transparent';
@@ -308,15 +429,13 @@ $("#gallery").on("click", ".SVGbox", function() {
 	$('.icon svg path').css('fill','#2f2f2f');
 
 	if (!swatchOpened) {
+	// let selector = " " + that + " "
+	theScale = parseInt($(that).css('height'),10);
 		setTimeout(function(){setSwatches();}, 500);		
-<<<<<<< HEAD
-=======
-
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
 		swatchOpened = true;
 	}
-});
 
+}
 
 
 
@@ -341,26 +460,67 @@ function openModal(modal) {
 
 function closeModals() {
 	$('.activeModal svg').css('height','15rem');
-	changeScale.value = 10;
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
 
 	title.src = "img/auroraLogoL.png";
 	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
-	$('#userBtn svg path').css('fill','#f5f5f5');
-	$('#helpBtn svg path').css('fill','#f5f5f5');
+	$('#userBtn svg path, #helpBtn svg path').css('fill','#f5f5f5');
 	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
+
+	priorMoves = [];
+	backCount = 0;
 };
 
 
 
 
-// HEY!
+// Quick Console Log
 
-function hey(log) {
-	if (log) {		
+function log(log) {
 	console.log(log);
-	} else {
-	console.log('hey');
+}
+
+
+var priorMoves = [];
+var backCount = 0;
+
+function setUndo(el){
+
+	let lastMove = [];
+	for (var i = 0; i < el.length; i++) {
+	    let lastMoves = new Object();
+	    lastMoves.el = el[i];
+	    if (el[i].style.fill !== "") {
+		    lastMoves.fillColor = el[i].style.fill;	    	
+	    } else {
+		    lastMoves.fillColor = "#ffffff";	    	
+	    }
+	    lastMove.push(lastMoves);
 	}
+    //Adding last move to an array of past actions
+    // priorMoves.push(lastMove);
+	if (el[0].style.fill !== lastMove[0].fillColor) {
+ 	   priorMoves.unshift(lastMove);
+
+    //Number sets length of history array. Limits how much memory app will take up
+    if (priorMoves[39]){
+        priorMoves.length = 40;
+    }
+	}
+}
+
+
+function undo() {
+	if (priorMoves.length) {
+		for (var i = 0; i < priorMoves[backCount].length; i++) {
+			log(priorMoves[backCount][i].fillColor);
+
+			$(priorMoves[backCount][i].el).css('fill', priorMoves[backCount][i].fillColor);
+		}
+	}
+	if (backCount < priorMoves.length -1) {		
+		backCount++;
+	} 
+
 }

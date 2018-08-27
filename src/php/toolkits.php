@@ -1,12 +1,10 @@
 <section class="toolkits hide" id="toolkits">
 
 	<div id="toolBar" class="toolBar">
-<<<<<<< HEAD
-		<input id="groupMode" type="checkbox">Group Colors
-=======
->>>>>>> d880378aaceda35cd8ba9951bac683b2599bdb14
-	 	<input id="changeScale" type="range" min="5" max="40" value="10" onchange="checkVal()">
-		<div id="palettes">
+		<!-- <input id="groupMode" type="checkbox">Group Colors -->
+	 	<div class="icon" id="zoomOut" onclick="scaleVal(0.9)"><?php include 'icon/zoomOut.svg'; ?></div>
+	 	<div class="icon" id="zoomIn" onclick="scaleVal(1.1)"><?php include 'icon/zoomIn.svg'; ?></div>
+		<div class="icon" id="palettes">
 			<div class="palette">
 				<p>#FFFFFF</p>
 				<p>#720066</p>
