@@ -12,6 +12,7 @@ var activeHue = 200;
 var activeSat = 100;
 var activeLit = 60;
 
+var theScale;
 
 
 
@@ -60,8 +61,14 @@ function clearImage(which) {
 
 
 function scaleVal(incr) {
+<<<<<<< HEAD
 	let theScale = parseInt($('.activeModal.SVGbox svg').css('height'),10) * incr;
 	console.log(theScale);
+=======
+	theScale *= incr;
+	console.log(theScale);
+	// $('.activeModal svg').css('transform','scale(' + (scaleTo/20) + ')');
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	$('.activeModal svg').css('height', theScale + 'px');
 }
 
@@ -140,6 +147,7 @@ $(document).on('keypress', function(event) {
 	// }
 
 // 1-0 = Switch images
+<<<<<<< HEAD
 
 for (var i = 0; i < gallery.children.length; i++) {
 if (event.keyCode === (49 + i)) {
@@ -152,6 +160,20 @@ if (event.keyCode === 48) {
 }
 }
 
+=======
+
+for (var i = 0; i < gallery.children.length; i++) {
+if (event.keyCode === (49 + i)) {
+	if (event.keyCode < 58) {
+	openImage(gallery.children[i]);		
+	}
+}
+if (event.keyCode === 48) {
+	openImage(gallery.children[9]);
+}
+}
+
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 
 // h = Hue shift (+)
 if (event.keyCode === 104) {
@@ -380,6 +402,10 @@ $('#swatches').dblclick(function(){
 });
 
 function showRainbow() {
+<<<<<<< HEAD
+=======
+	$('#toolkits').addClass('showRainbow');
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	clearInterval(idleInterval);
 	if ($('#toolkits').hasClass('showRainbow')) {
 		$('#toolkits').removeClass('showRainbow');
@@ -437,13 +463,21 @@ $("#gallery").on("click", ".SVGbox", function() {
 function openImage(that) {
 
 	openModal(that);
+<<<<<<< HEAD
 	$('.activeModal svg').css('height','100vh');	
+=======
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	$('#toolkits').removeClass('hide');
 
 	if (!swatchOpened) {
 		setTimeout(function(){setSwatches(theScheme);}, 500);		
 		swatchOpened = true;
 	}
+<<<<<<< HEAD
+=======
+	// let selector = " " + that + " "
+	theScale = parseInt($(that).css('height'),10);
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 
 }
 
@@ -453,9 +487,18 @@ function openModal(modal) {
 	if ($(modal).hasClass('activeModal') && (!$(modal).hasClass('SVGbox'))) {
 		closeModals();
 	}else {
+<<<<<<< HEAD
 		if ($(modal).is('#userModal')) {			
 			$('#userBtn svg path').css('fill','#ffba40');
 			$('#helpBtn img').attr('src','icon/help.png');
+=======
+		title.src = "img/auroraLogoL.png";
+		$('.SVGbox svg').css('height','15rem');
+		$('*').removeClass('activeModal');
+		if ($(modal).is('#userModal')) {			
+			$('#userBtn svg path').css('fill','#ffba40');
+			// $('#helpBtn svg path').css('fill','#f5f5f5');
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 		}
 		if ($(modal).is('#helpModal')) {			
 			$('#helpBtn svg path').css('fill','#86fff7');
@@ -467,8 +510,18 @@ function openModal(modal) {
 
 function closeModals() {
 	$('.activeModal svg').css('height','15rem');
+<<<<<<< HEAD
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
+=======
+	// theScale = 10;
+	$('*').removeClass('activeModal');
+	$('.toolkits').addClass('hide');
+
+	title.src = "img/auroraLogoL.png";
+	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
+	$('#userBtn svg path, #helpBtn svg path').css('fill','#f5f5f5');
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	$('#helpBtn img').attr('src','icon/help.png');
 	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
 
