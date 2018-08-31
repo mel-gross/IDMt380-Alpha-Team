@@ -1,9 +1,9 @@
 
 
 function load() {
-	defaultCanvas();
+	$("[data-name='outline'], [data-name='outlines'], #outline").css('pointer-events','none');
 	$('svg').addClass('svg');
-	// randomizeSwatches();
+	// scaleVal(30);
 }
 
 
@@ -14,21 +14,42 @@ var activeLit = 60;
 
 
 
-function defaultCanvas() {
-	$("[data-name='outline'], [data-name='outlines']").css('pointer-events','none');
-	
-}
 
-
-$('#gallery svg *, #gallery svg g *').mousedown(function(){
-  $(this).css("fill", activeColor);
-});
-
-$('#gallery svg *, #gallery svg g *').hover(function(){
-	if (down) {
-	  	$(this).css("fill", activeColor);		
+$('g g').on('click', function() {
+	setUndo(this.children);
+	if (backCount > 0) {
+		for (var i = 0; i < backCount.length; i++) {
+ 		return priorMoves.splice(0, 1);
+		}
 	}
+	backCount = 0;
+	var selector = '#' + this.id + ' *';
+	$(selector).css('fill', activeColor);
 });
+
+
+
+function clearImage(which) {
+	if (which === 'all') {
+		if(confirm("Are you sure you want to CLEAR ALL of your paintings? \nThis won't effect the paintings you've already saved.")) {
+			$('.SVGbox .innerBox svg g g *').css('fill', '#ffffff');			
+		}
+	}
+	else {
+		var toClear = $(which).children[0].children[0].children;
+		console.log(which);
+		for (var i = 0; i < toClear.length; i++) {
+			for (var j = 0; j < toClear[i].children.length; j++) {
+				$(toClear[i].children[j]).css('fill','#ffffff');
+			}
+		}
+	}
+}
+// $('#gallery svg *, #gallery svg g *').hover(function(){
+// 	if (down) {
+// 	  	$(this).css("fill", activeColor);		
+// 	}
+// });
 
 
 // $('#gallery svg *, #gallery svg g *').click(function(){
@@ -37,13 +58,11 @@ $('#gallery svg *, #gallery svg g *').hover(function(){
 
 // var brushing = setInterval(brush,50);
 
-var scaleTo = changeScale.value;
-var check = setInterval(scaleVal,10);
 
-function scaleVal() {
-	scaleTo = changeScale.value;
-	$('.activeModal svg').css('transform','scale(' + scaleTo/10 + ')');
-
+function scaleVal(incr) {
+	let theScale = parseInt($('.activeModal.SVGbox svg').css('height'),10) * incr;
+	console.log(theScale);
+	$('.activeModal svg').css('height', theScale + 'px');
 }
 
 
@@ -73,61 +92,142 @@ function scaleVal() {
 
 
 
-//  TOOL KIT
-
-var bucket = false;
-var eyeDrop = false;
-var eraser = false;
-var marker = false;
-
+//  HOT KEYS
+var swatchI = 0;
+var imageI = 0;
 
 $(document).on('keypress', function(event) {
-	hey(event.keyCode);
-	// Activate Bucket
-	if (event.keyCode == 32) {
-		if (!eyeDrop) {
-			$('activeModal.SVGbox svg').addClass('eyeDrop');
-			$('#toolkit div').removeClass('activeTool');
-			$('#eyeDropTool').addClass('activeTool');
-			eyeDrop = false;
-		}
-		eyeDrop = true;
+
+// q = Exit out of modals
+	log(event.keyCode);
+	if (event.keyCode === 113) {
+		closeModals();
 	}
+
+// ,/. = Zoom in/out
+	if (event.keyCode === 44 ) {
+		scaleVal(0.9);
+	}
+	if (event.keyCode === 46 ) {
+		scaleVal(1.1);
+	}
+
+// c = Show color picker
+	if (event.keyCode === 99 ) {
+	if ($('#toolkits').hasClass('showRainbow')) {
+        $('#toolkits').removeClass('showRainbow');		
+	} else {
+		showRainbow();
+	}
+	}
+
+// ^W = Wipe ALL images
+	if (event.keyCode === 87) {
+		clearImage('all');
+	}
+
+// w = Wipe open image
+	if (event.keyCode === 119) {
+		clearImage('.SVGbox.activeModal');
+	}
+
+// u/i = Open account/info pages
+	if (event.keyCode === 105) {
+		openModal('#helpModal');
+	}
+	// if (event.keyCode === 117) {
+	// 	openModal('#userModal');
+	// }
+
+// 1-0 = Switch images
+
+for (var i = 0; i < gallery.children.length; i++) {
+if (event.keyCode === (49 + i)) {
+	if (event.keyCode < 58) {
+	openImage(gallery.children[i]);		
+	}
+}
+if (event.keyCode === 48) {
+	openImage(gallery.children[9]);
+}
+}
+
+
+// h = Hue shift (+)
+if (event.keyCode === 104) {
+	if (activeHue < 360) {
+		activeHue += 10;
+	} else {
+		activeHue = 0;
+	}
+}
+// ^H = Hue shift (-)
+if (event.keyCode === 72) {
+	if (activeHue > 0) {
+		activeHue -= 10;
+	} else {
+		activeHue = 360;
+	}
+}
+// b = Brightness shift (+)
+if (event.keyCode === 98) {
+	if (activeLit < 100) {
+		activeLit += 5;
+	}else {
+		activeLit = 0;
+	}
+}
+// ^B = Brightness shift (-)
+if (event.keyCode === 66) {
+	if (activeLit > 0) {
+		activeLit -= 5;
+	} else {
+		activeLit = 100;
+	}
+}
+idleTime = 0;
+changeColor(activeHue, activeSat, activeLit);
+movePicker(activeHue, activeLit);
+
+// n = back a Swatch
+if (event.keyCode === 86) {
+	if (swatchI <= 0) {
+		swatchI = swatches.children.length-1;
+	} else {swatchI--;}
+	switchSwatch(swatches.children[swatchI]);
+}
+
+// m = forward a Swatch
+if (event.keyCode === 118) {
+	if (swatchI >= swatches.children.length-1) {
+		swatchI = 0;
+	} else {swatchI++;}
+	// console.log(swatches.children[2]);
+	switchSwatch(swatches.children[swatchI]);
+}
+
+
+// Toggle Grouping
+
+if (event.keyCode === 103) {
+	if (!groupMode.checked) {
+		groupMode.checked = true;
+	}
+	else {
+		groupMode.checked = false;
+	}
+}
+
+// z = Undo
+	if (event.keyCode === 122) {
+		undo();
+	}
+
 });
 
-$('.eyeDrop path, .eyeDrop * path').click(()=> {
-	hey();
+$('.eyeDrop path, .eyeDrop * path').click(function(){
+	log();
 });
-// 	// Activate Bucket
-// 	if (event.keyCode == 98) {
-// 		if (!bucket) {
-// 			$('svg').addClass('bucket');
-// 			$('#toolkit div').removeClass('activeTool');
-// 			$('#bucketTool').addClass('activeTool');
-// 		}
-// 		bucket = true;
-// 	}
-
-// 	// Activate Eye Drop
-// 	if (event.keyCode == 105) {
-// 		if (!eyeDrop) {$('svg').addClass('eyeDrop');}
-// 		eyeDrop = true;
-// 	}
-
-// 	// Activate Erasor
-// 	if (event.keyCode == 101) {
-// 		if (!eraser) {$('svg').addClass('eraser');}
-// 		eraser = true;
-// 	}
-
-// 	// Activate Marker
-// 	if (event.keyCode == 109) {
-// 		if (!marker) {$('svg').addClass('marker');}
-// 		marker = true;
-// 	}
-
-
-// });
 
 
 var x, y, w, h;
@@ -135,7 +235,7 @@ var x, y, w, h;
 document.addEventListener('mousemove', onMouseUpdate, false);
 
 var down = false;
-$('#colorPicker, .SVGbox').mousedown(()=> {
+$('#colorPicker, .SVGbox').mousedown(function(){
 	down = true;
 	idleTime = 0;
 });
@@ -147,7 +247,8 @@ $('#colorPicker').click(function(){
 	clickMove(x, y);
 });
 
-$('#colorPicker, .SVGbox').mouseup(()=> {down = false;});
+$('#colorPicker, .SVGbox').mouseup(function() {down = false;});
+// $('#colorPicker, .SVGbox').mouseout(function() {down = false;});
 
 function onMouseUpdate(e) {
 	x = e.clientX - $('#colorPicker').offset().left;
@@ -174,6 +275,8 @@ function changeColor(hue,sat,lit) {
 	activeColor = "hsl(" + hue + ", " + sat + "%, " + lit + "%)";
 	console.log(activeColor);
 
+	activeHue = hue;
+	activeLit = lit;
 	activeSwatch.style.background = activeColor;
 	swatches.style.background = activeColor;
 	pickerButton.style.background = activeColor;
@@ -184,18 +287,53 @@ function changeColor(hue,sat,lit) {
 
 var swatchOpened = false;
 
-function randomizeSwatches() {
-		var scheme1 = ['#720066','#ffba40','#86fff7'];
-		var scheme2 = ['#FF0000','#00FF00','#0000FF'];
-		var scheme3 = ['#123456','#654321','#abcdef'];
-		var scheme4 = ['#ffffff','#ff0022','#333333'];
 
-		var schemes = [scheme1,scheme2,scheme3,scheme4];
 
-		var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
+var schemes = [];
+for (var i = 0; i < palettes.children.length; i++) {
+	let aScheme = [];
+	for (var j = 0; j < palettes.children[i].children.length; j++) {
+		aScheme.push(palettes.children[i].children[j].innerHTML);
+	}
+	schemes.push(aScheme);
+	var first = palettes.children[i].children[0].innerHTML;
+	var second = palettes.children[i].children[1].innerHTML;
+	var third = palettes.children[i].children[2].innerHTML;
+	var fourth = palettes.children[i].children[3].innerHTML;
+	palettes.children[i].style.background = "linear-gradient(90deg, " + first + " 0%, " + second + " 33%, " + third + " 67%, " + fourth + " 100%)";
+}
+
+var theScheme = schemes[Math.floor(Math.random()*schemes.length)];
+
+
+
+$('#palettes').on('click',function() {
+	$(this).toggleClass('open');
+});
+
+
+$('.palette').on('click',function(){changePalette(this)});
+
+function changePalette(that) {
+	console.log(that);
+	theScheme = [];
+	if(that !== undefined) {
+	console.log(that);
+		for (var i = 0; i < that.children.length; i++) {
+			theScheme.push(that.children[i].innerHTML);
+		}
+	}
+	setSwatches(theScheme);
+}
+
+
+
+function setSwatches(theScheme) {
+
+		// changePalette();
 		console.log(theScheme);
 
-		for (var i = 0; i < swatches.children.length; i++) {
+		for (var i = 0; i < $('.swatch').length; i++) {
 
 		// activeHue = Math.floor(Math.random() * 360);
 		// activeLit = Math.floor(25 + Math.random() * 51);
@@ -216,37 +354,50 @@ function randomizeSwatches() {
 }
 
 
-$('.swatch').click(function() {
+$('.swatch').click(function(){switchSwatch(this)});
+
+function switchSwatch(which) {
+	console.log(which);
 	$('.swatch').attr("id","not");
-	$(this).attr("id","activeSwatch");
-	var colorArray = getRgbArray($(this).css('background'), false, 'hsl');
-	idleTime=0;
+	$(which).attr("id","activeSwatch");
+	var colorArray = getRgbArray($(which).css('background'), false, 'hsl');
+	idleTime = 0;
 	changeColor(colorArray[0], colorArray[1], colorArray[2]);
 	movePicker(colorArray[0],colorArray[2]);
-});
-
+}
 
 // Show color picker when you click a swatch, and hide it when you idle 
 
 var idleInterval;
 var idleTime = 0;
 
-$('#toolkits').on('doubletap',function(event){
-	showRainbow('#toolkits');
+$('#swatches').on('doubletap',function(event){
+	showRainbow();
 });
 
-$('#toolkits').dblclick(function(){
-	showRainbow('#toolkits');
+$('#swatches').dblclick(function(){
+	showRainbow();
 });
 
-function showRainbow(that) {
-	$(that).addClass('showRainbow');
+function showRainbow() {
 	clearInterval(idleInterval);
-    idleInterval = setInterval(timer, 1000); 
+	if ($('#toolkits').hasClass('showRainbow')) {
+		$('#toolkits').removeClass('showRainbow');
+		$('#seeColors').css('tranform','rotateY(0deg)');
+	} else {
+		$('#toolkits').addClass('showRainbow');
+		$('#seeColors').css('tranform','rotateY(180deg)');
+	    idleInterval = setInterval(timer, 1000); 
+
+	}
 }
 
 
-$('.SVGbox').click(function(){$('#toolkits').removeClass('showRainbow');});
+$('.SVGbox').click(function(){
+	$('#toolkits').removeClass('showRainbow');
+	$('#palettes').removeClass('open');
+
+});
 
 function timer() {
     idleTime++;
@@ -271,24 +422,30 @@ function movePicker(left, top) {
 // UI INTERACTIONS
 
 
-$('#title').click(() => {closeModals()});
-$('#userBtn').click(() => {openModal('#userModal')});
-$('#helpBtn').click(() => {openModal('#helpModal')});
+$('#title').click(function (){closeModals()});
+$('#userBtn').click(function (){openModal('#userModal')});
+$('#helpBtn').click(function (){openModal('#helpModal')});
 
 $("#gallery").on("click", ".SVGbox", function() {
-	openModal(this);
-	$('#toolkits').removeClass('hide');
-	title.src = "img/auroraLogo.png";
-	nav.style.background = 'transparent';
-	$('#title, .icon svg').css('filter','none');
-	$('.icon svg path').css('fill','#2f2f2f');
-
-	if (!swatchOpened) {
-		setTimeout(function(){randomizeSwatches();}, 500);		
-		swatchOpened = true;
+	if ($(this).hasClass('activeModal')) {
+	console.log('already open');		
+	} else {
+		openImage(this);
 	}
 });
 
+function openImage(that) {
+
+	openModal(that);
+	$('.activeModal svg').css('height','100vh');	
+	$('#toolkits').removeClass('hide');
+
+	if (!swatchOpened) {
+		setTimeout(function(){setSwatches(theScheme);}, 500);		
+		swatchOpened = true;
+	}
+
+}
 
 
 
@@ -296,62 +453,78 @@ function openModal(modal) {
 	if ($(modal).hasClass('activeModal') && (!$(modal).hasClass('SVGbox'))) {
 		closeModals();
 	}else {
-		title.src = "img/auroraLogoL.png";
-		$('*').removeClass('activeModal');
 		if ($(modal).is('#userModal')) {			
 			$('#userBtn svg path').css('fill','#ffba40');
-			$('#helpBtn svg path').css('fill','#f5f5f5');
+			$('#helpBtn img').attr('src','icon/help.png');
 		}
 		if ($(modal).is('#helpModal')) {			
 			$('#helpBtn svg path').css('fill','#86fff7');
-			$('#userBtn svg path').css('fill','#f5f5f5');
+			$('#helpBtn img').attr('src','icon/helpOpen.png');
 }
 		$(modal).addClass('activeModal');
 	}
 }
 
 function closeModals() {
-	$('.activeModal svg').css('transform','scale(1)');
-	changeScale.value = 10;
+	$('.activeModal svg').css('height','15rem');
 	$('*').removeClass('activeModal');
 	$('.toolkits').addClass('hide');
-
-	title.src = "img/auroraLogoL.png";
-	nav.style.background = 'linear-gradient(rgba(0,0,10,.7) 0%, transparent)';
-	$('#userBtn svg path').css('fill','#f5f5f5');
-	$('#helpBtn svg path').css('fill','#f5f5f5');
+	$('#helpBtn img').attr('src','icon/help.png');
 	$('#title, .icon svg').css('filter','drop-shadow(0 0 10px black)');
+
+	priorMoves = [];
+	backCount = 0;
 };
 
 
 
 
-$(window).scroll(function() {
-	if ($('#wrapper').scrollTop() > 300) {
-		$('#avatar').addClass('hide');
-		$('#helpBtn').removeClass('hide');
-	} else {
-		$('#avatar').removeClass('hide');
-		$('#helpBtn').addClass('hide');
+// Quick Console Log
 
-	}
-});
-
-
-
-// $('.helpModal').click('.accordion', ()=> {
-// 	// $('.accordion p').addClass('hide');
-	
-// 	// hey(this.classList);
-// });
-
-
-// HEY!
-
-function hey(log) {
-	if (log) {		
+function log(log) {
 	console.log(log);
-	} else {
-	console.log('hey');
+}
+
+
+var priorMoves = [];
+var backCount = 0;
+
+function setUndo(el){
+
+	let lastMove = [];
+	for (var i = 0; i < el.length; i++) {
+	    let lastMoves = new Object();
+	    lastMoves.el = el[i];
+	    if (el[i].style.fill !== "") {
+		    lastMoves.fillColor = el[i].style.fill;	    	
+	    } else {
+		    lastMoves.fillColor = "#ffffff";	    	
+	    }
+	    lastMove.push(lastMoves);
 	}
+    //Adding last move to an array of past actions
+    // priorMoves.push(lastMove);
+	if (el[0].style.fill !== lastMove[0].fillColor) {
+ 	   priorMoves.unshift(lastMove);
+
+    //Number sets length of history array. Limits how much memory app will take up
+    if (priorMoves[39]){
+        priorMoves.length = 40;
+    }
+	}
+}
+
+
+function undo() {
+	if (priorMoves.length) {
+		for (var i = 0; i < priorMoves[backCount].length; i++) {
+			log(priorMoves[backCount][i].fillColor);
+
+			$(priorMoves[backCount][i].el).css('fill', priorMoves[backCount][i].fillColor);
+		}
+	}
+	if (backCount < priorMoves.length -1) {		
+		backCount++;
+	} 
+
 }
