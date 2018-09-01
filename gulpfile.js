@@ -4,6 +4,7 @@ const csso = require('gulp-csso');
 const uglify = require('gulp-uglify');
 const pump = require('pump');
 const del = require('del');
+const babel = require('gulp-babel');
 
 gulp.task('default', ['styles', 'scripts', 'copy']);
 
@@ -25,6 +26,9 @@ gulp.task('scripts', (cb) => {
     // plug-in to identify the error occured while minifying JS
     pump([
      gulp.src('./src/js/**/*.js'),
+        babel({
+            presets: ['env']
+        }),
         sourcemaps.init(),
         uglify(),
         sourcemaps.write('.'),
