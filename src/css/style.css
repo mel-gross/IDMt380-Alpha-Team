@@ -1,7 +1,11 @@
 /* GENERAL STYLES */
 
 html {
+<<<<<<< HEAD
+	font-size: 140%;
+=======
 	font-size: 100%;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	background: url(../img/aurora-borealis-loop3.gif), #2d2d3d;
 	background-blend-mode: soft-light;
 	background-size: cover;
@@ -101,6 +105,15 @@ button {
 		transform: rotateZ(0deg);
 	}
 	20% {
+<<<<<<< HEAD
+		transform: rotateZ(-20deg);
+	}
+	50% {
+		transform: rotateZ(20deg);
+	}
+	70% {
+		transform: rotateZ(-5deg);
+=======
 		transform: rotateZ(-30deg);
 	}
 	50% {
@@ -108,6 +121,7 @@ button {
 	}
 	70% {
 		transform: rotateZ(-10deg);
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	}
 	100% {
 		transform: rotateZ(0deg);
@@ -160,13 +174,22 @@ g g:hover * {
 
 .gallery {
 	width: 100%;
+	padding: 0 1rem;
 	display: flex;
 	flex-flow: row wrap;
-	justify-content: center;
-	padding: 0 1rem;
+	justify-content: flex-start;
 }
 
 .SVGbox {
+<<<<<<< HEAD
+	width: 10rem;
+	max-width: 50%;
+	height: 13.5rem;
+	/*padding-right: 2rem;*/
+	/*margin: 0 0rem 3em;*/
+	transition: .5s;
+	/*flex-grow: 1;*/
+=======
 	/*width: 100%;*/
 	/*flex-grow: 1 0 20%;*/
 	max-width: 13rem;
@@ -176,15 +199,30 @@ g g:hover * {
 	/*padding: 1rem 0;*/
 	transition: .3s;
 	flex-grow: 1;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 }
 
 .SVGbox:not(.activeModal):hover {
 	cursor: pointer;
 }
+<<<<<<< HEAD
+.SVGbox:not(.activeModal):hover svg {
+	transform: translate(-3rem, -2rem);
+	transition: .2s;
+	box-shadow: 2px 2px 20px black;
+}
+
+.gallery .SVGbox h2 {
+	margin: 0rem auto;
+	text-align: center;
+	max-width: 40%;
+	display: none;
+=======
 
 .gallery .SVGbox h2 {
 	/*margin: 1rem 0 0 0rem;*/
 	text-align: left;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 }
 
 .gallery .SVGbox svg {
@@ -202,6 +240,8 @@ g g:hover * {
 .toolkits {
 	width: 100%;
 	pointer-events: none !important;
+<<<<<<< HEAD
+=======
 	transition: .2s;
 	z-index: 6;
 }
@@ -209,6 +249,7 @@ g g:hover * {
 .toolkits * {
 	pointer-events: all;
 	/*width: auto;*/
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	transition: .2s;
 	z-index: 6;
 }
@@ -229,7 +270,11 @@ g g:hover * {
 .toolBar {
 	display: flex;
 	flex-flow: row wrap;
+<<<<<<< HEAD
+	justify-content: flex-end;
+=======
 	justify-content: flex-start;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	position: fixed;
 	bottom: 8.5em;
 	left: 0;
@@ -245,6 +290,8 @@ g g:hover * {
 
 .toolBar * {
 	pointer-events: all;
+<<<<<<< HEAD
+=======
 	flex-flow: column nowrap;
 	justify-content: flex-end;
 	position: fixed;
@@ -257,6 +304,7 @@ g g:hover * {
 	color: #444;
 	/*font-size: 2rem;*/
 	/*z-index: 30;*/
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 }
 
 .colorPicker {
@@ -298,7 +346,7 @@ g g:hover * {
 	height: 1.5rem;
 	flex: 1 0 20%;
 	width: 3rem;
-	margin-right: 1rem;
+	margin-right: .5rem;
 	border: 1px solid #444;
 	border-radius: 2px;
 	transition: .2s;
@@ -349,6 +397,8 @@ g g:hover * {
 	flex: 1 0 26%;
 	height: 2rem;
 	width: 2rem;
+<<<<<<< HEAD
+=======
 	margin-right: .5rem;
 	margin-bottom: .5rem;
 	border: 1px solid black;
@@ -405,11 +455,17 @@ g g:hover * {
 	flex: 1 0 26%;
 	height: 2rem;
 	width: 2rem;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	background: black;
 	margin-right: .5rem;
 	margin-bottom: .5rem;
 	border: 1px solid black;
 	border-radius: 2px;
+<<<<<<< HEAD
+}
+
+
+=======
 }
 
 
@@ -428,6 +484,7 @@ g g:hover * {
 	display: none;
 }
 
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 
 .palette p {
 	display: none;
@@ -626,11 +683,19 @@ g g:hover * {
 }
 
 .activeModal.SVGbox {
+<<<<<<< HEAD
+	background: url(../img/canvasTexture.jpg);
+	background-size: cover;
+	background-position: center;
+	padding: 4em 1rem;
+	/*color: #444;*/
+=======
 	background: url(../img/canvasTextureL.jpg);
 	background-size: cover;
 	background-position: center;
 	padding: 7em 1rem 4em;
 	color: #444;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	z-index: 5;
 	overflow: auto !important;
 }
@@ -641,27 +706,31 @@ g g:hover * {
 	left: 0;
 	padding-left: 2rem;
 	border-top: 1px solid #444;
-	text-shadow: 0 0 10px #f5f5f5;
-}
-
-.activeModal.SVGbox p {
-	position: fixed;
-	top: 6rem;
-	margin-left: 4rem;
-	text-shadow: 0 0 10px #f5f5f5;
+	text-shadow: 0 0 10px #444;
 }
 
 .activeModal.SVGbox svg {
+<<<<<<< HEAD
+	/*width: 100%;*/
+	min-width: 100vw;
+	height: 100vh;
+=======
 	width: 100%;
 	max-width: 200vw;
 	height: 100%;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	margin: 0;
 	pointer-events: all;
 	position: relative;
 }
 .activeModal .innerBox {
+<<<<<<< HEAD
+	min-width: 100vw;
+	min-height: 100vh;
+=======
 	width: 100%;
 	height: 200vh;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	padding-bottom: 3rem;
 	position: absolute;
 }
@@ -707,6 +776,10 @@ g g:hover * {
 	}
 	#swatches {
 		/*width: auto;*/
+<<<<<<< HEAD
+		height: 2.5rem;
+=======
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 		justify-content: flex-start;
 		padding-right: 1rem;
 	}
@@ -731,6 +804,10 @@ g g:hover * {
 		margin: 0;
 		border-left: 1px solid #444;
 		border-top: 0px;
+<<<<<<< HEAD
+		display: block;
+=======
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	}
 	.signIn {
 		display: flex;
@@ -742,6 +819,14 @@ g g:hover * {
 /* DESKTOP */
 
 @media screen and (min-width: 64em) {
+<<<<<<< HEAD
+
+	html {
+		font-size: 100%;
+	}
+
+=======
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	h1,
 	h3 {
 		text-align: left;
@@ -762,6 +847,15 @@ g g:hover * {
 		transition: .2s;
 		cursor: pointer;
 	}
+<<<<<<< HEAD
+	#swatches .icon {
+		height: 1.5rem;
+		width: 1.5rem;
+		margin: 0;
+	}
+
+=======
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	.about {
 		height: 0em;
 	}
@@ -802,10 +896,15 @@ g g:hover * {
 	.activeModal.SVGbox p {
 		top: 8rem;
 	}
+<<<<<<< HEAD
+	.toolBar {
+		/*bottom: 9.5em;*/
+=======
 	.swatch,
 	.erasor {
 		height: 2rem;
 		width: 4.5rem;
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 	}
 	/* HDTV */
 	@media screen and (min-width: 84em) {

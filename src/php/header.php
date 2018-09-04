@@ -27,6 +27,8 @@
 <<<<<<< HEAD
 				<div id="helpBtn" class="icon">
 					<img src="icon/help.png" alt="">
+<<<<<<< HEAD
+=======
 =======
 				<div id="userBtn" class="icon">
 					<?php include 'icon/login.svg'; ?>
@@ -34,6 +36,7 @@
 				</div>
 				<div id="helpBtn" class="icon">
 					<?php include 'icon/help.svg'; ?>
+>>>>>>> 0965179b9a046d96af3a856236481360a6ba938a
 				</div>
 				<div id="XoutBtn" class="icon hide">
 					<?php include 'icon/Xout.svg'; ?>
