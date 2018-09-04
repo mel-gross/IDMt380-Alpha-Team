@@ -313,7 +313,7 @@ var swatchOpened = false;
 
 var schemes = [];
 for (var i = 0; i < palettes.children.length; i++) {
-	let aScheme = [];
+	var aScheme = [];
 	for (var j = 0; j < palettes.children[i].children.length; j++) {
 		aScheme.push(palettes.children[i].children[j].innerHTML);
 	}
@@ -544,9 +544,9 @@ var backCount = 0;
 
 function setUndo(el){
 
-	let lastMove = [];
+	var lastMove = [];
 	for (var i = 0; i < el.length; i++) {
-	    let lastMoves = new Object();
+	    var lastMoves = new Object();
 	    lastMoves.el = el[i];
 	    if (el[i].style.fill !== "") {
 		    lastMoves.fillColor = el[i].style.fill;	    	
