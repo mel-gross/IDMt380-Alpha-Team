@@ -48,5 +48,14 @@
         "password": "pass1234",
         "avatar": "snake",
         "saved_work": []
+    },
+    {
+        "user_id": 4,
+        "username": "ara82@drexel.edu",
+        "password": "pass1234",
+        "avatar": null,
+        "saved_work": [
+         
+        ]
     }
 ]
