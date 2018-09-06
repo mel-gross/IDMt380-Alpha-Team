@@ -19,9 +19,7 @@ if (svgEl.classList.contains('user')) {
     pathData.value = svgEl.id;
 }
 console.log(submitBtn.value);
-    submitBtn.addEventListener('click', function (event) {
-        event.preventDefault();
-    });
+
 
 
 submitForm();

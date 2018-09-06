@@ -204,14 +204,14 @@ g g:hover * {
 	width: 100%;
 	pointer-events: none !important;
 	transition: .2s;
-	z-index: 6;
+	z-index: 600;
 }
 
 .toolkits * {
 	pointer-events: all;
 	/*width: auto;*/
 	transition: .1s;
-	z-index: 6;
+	z-index: 600;
 }
 
 .toolkits .colorPicker, .toolkits #swatches, .toolkits .toolBar {

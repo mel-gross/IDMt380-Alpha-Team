@@ -10,6 +10,7 @@
 		 <form action="" method="post" id="save-work-form">
 		<button id="save-btn" class="temp" >Save Work</button>
 		<input type="text"  name="save-work" class="temp" id="save-work" value="">
+		<input type="text" name="save-path" class="temp" id="save-path" value="">
 		</form>
 
 		

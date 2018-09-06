@@ -72,6 +72,7 @@ function login() {
         } else {
             //login failed, this should trigger state change in UI
             $currentUser = NULL;
+            echo "<script type='text/javascript'>alert('incorrect username or password');</script>";
         }
     }
 };
@@ -111,15 +112,10 @@ function saveWork(){
     //$user = $userData[$currentUserIndex];
     $savedWork = $userData[$currentUserIndex]['saved_work'];
     //path to image
-
-    if ($_POST['save-path'] == NULL) {
-
+    
     $savedPath = 'img/saved/saved_' . $currentUserIndex . sizeof($savedWork) . '.html';
 
-    } else {
-
-        $savedPath = 'img/saved/saved_' . $currentUserIndex . $_POST['save-path'];
-    }
+     
 
     // for this we will say fresh work have null as savedId 
     // but we need to figure something that will work with HTML and JS

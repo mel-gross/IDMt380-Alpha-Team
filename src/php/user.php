@@ -39,6 +39,7 @@
 		$userData = json_decode($userFile, true);
 		$thisUser = $_GET['username'];
 		
+		
 
 		foreach($userData as $user) {
 
@@ -47,8 +48,8 @@
 					foreach ($user['saved_work'] as $work) {
 
 						echo 
-						'<div class="SVGbox user">
-						<div class="innerBox" id="' . $work['saved_id'] . '">';
+						'<div class="SVGbox ">
+						<div class="innerBox user" id="' . $work['saved_id'] . '">';
 						
 						include $work["saved_source"];	
 

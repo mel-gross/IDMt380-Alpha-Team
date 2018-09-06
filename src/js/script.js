@@ -13,6 +13,7 @@ var activeSat = 100;
 var activeLit = 60;
 
 var theScale;
+var activeColor;
 
 
 
